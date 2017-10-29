@@ -1,0 +1,29 @@
+@import (reference) 'base/variables';
+@import (reference) 'base/mixins';
+
+.root {
+    padding: 5px;
+    font-size: 14px;
+    a {
+        display: inline-block;
+        color: @black;
+        text-decoration: none;
+        vertical-align: middle;
+        .text-capitalize;
+        &:not(:first-child) {
+            padding-left: 6px;
+        }
+        &:not(:last-child) {
+            padding-right: 6px;
+        }
+        &.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    }
+    hr {
+        border: 0;
+        border-top: 1px solid silver;
+        margin: 6px 0;
+    }
+}
