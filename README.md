@@ -23,41 +23,20 @@ npm start        # Start webpack dev server
 npm run build    # Prepare app for production (minify bundles, copy assets, etc.)
 ```
 
-### Recommended project structure
+### Project structure
 ```
 .
 |--build                          # Ready for production app
 |--src
-   |--app                         # App root folder
+   |--app                         # App folder
       |--api                      # Common services and utils
       |--components               # Common reusable components
-         |--button
-            |--index.js
-            |--button.jsx
-            |--button.less
       |--containers               # Common reusable containers
-         |--searchPage
-            |--index.js
-            |--searchPage.jsx
-            |--searchPage.less
       |--root                     # App root component
-         |--index.js
-         |--root.jsx
-         |--root.less
-      |--store                    # Redux setup (store, middleware, etc.)
-         |--index.js
-      |--auth                     # Auth section example
-         |--components            # Auth components
-         |--containers            # Auth containers
-         |--ducks                 # Auth actions, reducers, etc.
-         |--index.js               
-      |--profile                  # Profile section example
-         |--components            # Profile components
-         |--containers            # Profile containers
-         |--ducks                 # Profile actions, reducers, etc.
-         |--index.js
+      |--store                    # Redux store
    |--assets                      # Images, fonts, etc.
    |--styles                      # Common styles (variables, mixins, etc.)
+   |--index.html
 ```
 
 ### Useful stuff
