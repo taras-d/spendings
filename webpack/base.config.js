@@ -14,11 +14,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            // Aliases for common api, components and containers
-            // (https://webpack.js.org/configuration/resolve/#resolve-alias)
-            api: path.join(paths.srcDir, 'app/api'),
-            components: path.join(paths.srcDir, 'app/components'),
-            containers: path.join(paths.srcDir, 'app/containers')
+            // Aliase for common components
+            components: path.join(paths.srcDir, 'app/components')
         }
     },
     module: {
