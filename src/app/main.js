@@ -3,10 +3,8 @@ import { render } from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-// Antd
-import { LocaleProvider } from 'antd';
+import LocaleProvider from 'antd/lib/locale-provider';
 import enUS from 'antd/lib/locale-provider/en_US';
-import 'antd/dist/antd.css';
 
 import '../styles/main.less';
 
