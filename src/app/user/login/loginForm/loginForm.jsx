@@ -18,7 +18,7 @@ export default class LoginForm extends React.Component {
             password: ''
         },
         errors: null,
-        loading: false
+        loading: this.props.loading
     };
 
     submitted = false;
@@ -60,6 +60,13 @@ export default class LoginForm extends React.Component {
         );
     }
 
+    componentWillReceiveProps(nextProps) {
+        const props = this.props;
+        if (props.loading !== nextProps.loading) {
+            this.setState({ loading: nextProps.loading });
+        }
+    }
+
     validate = data => {
 
         if (!this.submitted) {
@@ -67,14 +74,8 @@ export default class LoginForm extends React.Component {
         }
 
         return utils.validate(data, {
-            email: { 
-                required: true,
-                email: true 
-            },
-            password: { 
-                required: true,
-                length: { minimum: 6 }
-            }
+            email: { required: true, email: true },
+            password: { required: true }
         });
     }
 
@@ -97,9 +98,9 @@ export default class LoginForm extends React.Component {
 
         const errors = this.validate(this.state.data);
 
-        this.setState({ errors, loading: !errors }, () => {
+        this.setState({ errors }, () => {
             if (!errors) {
-                console.log(this.state.data);
+                this.props.onSubmit(this.state.data);
             }
         });
     }
