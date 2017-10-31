@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import update from 'immutability-helper';
 
 import Form from 'antd/lib/form';
@@ -56,6 +57,9 @@ export default class LoginForm extends React.Component {
                         Log in
                     </Button>
                 </Form.Item>
+                <div className="text-center">
+                    Or <Link to="/signup">create account</Link>
+                </div>
             </Form>
         );
     }
