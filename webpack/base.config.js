@@ -14,8 +14,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            // Aliase for common components
-            components: path.join(paths.srcDir, 'app/components')
+            // Aliase for common imports
+            components: path.join(paths.srcDir, 'app/components'),
+            utils: path.join(paths.srcDir, 'app/utils')
         }
     },
     module: {

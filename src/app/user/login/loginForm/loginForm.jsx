@@ -1,71 +1,107 @@
 import React from 'react';
+import update from 'immutability-helper';
 
 import Form from 'antd/lib/form';
 import Input from 'antd/lib/input';
 import Icon from 'antd/lib/icon';
-import Card from 'antd/lib/card';
 import Button from 'antd/lib/button';
-import Checkbox from 'antd/lib/checkbox';
+
+import utils from 'utils';
 
 import './loginForm.less';
 
 export default class LoginForm extends React.Component {
 
     state = {
-        email: '',
-        password: '',
-        remember: true
-    }
+        data: {
+            email: '',
+            password: ''
+        },
+        errors: null,
+        loading: false
+    };
+
+    submitted = false;
 
     render() {
-        const { email, password, remember } = this.state;
+        const { data, loading } = this.state;
+        let errors = this.state.errors || {};
+            
         return (
-            <Card className="login-form" title="Log in">
-                <Form className="base-form" onSubmit={this.onSubmit}>
-                    <Form.Item>
-                        <Input name="email" 
-                            placeholder="Enter email" 
-                            prefix={<Icon type="mail"/>} 
-                            value={email} 
-                            onChange={this.onFieldChange}/>
-                    </Form.Item>
-                    <Form.Item>
-                        <Input name="password" 
-                            placeholder="Enter password" 
-                            type="password" 
-                            prefix={<Icon type="lock"/>} 
-                            value={password} 
-                            onChange={this.onFieldChange}/>
-                    </Form.Item>
-                    <Form.Item>
-                        <Checkbox name="remember"
-                            value={remember}
-                            onChange={this.onFieldChange}>
-                            Remember me
-                        </Checkbox>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button className="login-form-submit"
-                            type="primary" 
-                            htmlType="submit">
-                            Log in
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Card>
+            <Form className="login-form" onSubmit={this.onSubmit}>
+                <Form.Item validateStatus={errors.email? 'error': ''} help={errors.email}>
+                    <Input name="email"
+                        placeholder="Enter email" 
+                        addonBefore={<Icon type="mail" title="Email"/>} 
+                        disabled={loading}
+                        maxLength="80"
+                        value={data.email} 
+                        onChange={this.onFieldChange}/>
+                </Form.Item>
+                <Form.Item validateStatus={errors.password? 'error': ''} help={errors.password}>
+                    <Input name="password" 
+                        placeholder="Enter password" 
+                        type="password" 
+                        addonBefore={<Icon type="lock" title="Password"/>} 
+                        disabled={loading}
+                        maxLength="80"
+                        value={data.password} 
+                        onChange={this.onFieldChange}/>
+                </Form.Item>
+                <Form.Item>
+                    <Button className="login-form-submit"
+                        type="primary" 
+                        htmlType="submit"
+                        loading={loading}>
+                        Log in
+                    </Button>
+                </Form.Item>
+            </Form>
         );
+    }
+
+    validate = data => {
+
+        if (!this.submitted) {
+            return null;
+        }
+
+        return utils.validate(data, {
+            email: { 
+                required: true,
+                email: true 
+            },
+            password: { 
+                required: true,
+                length: { minimum: 6 }
+            }
+        });
     }
 
     onFieldChange = event => {
         const target = event.target;
-        this.setState({
-            [target.name]: target.type === 'checkbox'? target.checked: target.value
+
+        const data = update(this.state.data, {
+            [target.name]: {$set: target.value}
         });
+
+        const errors = this.validate(data);
+
+        this.setState({ data, errors });
     }
 
     onSubmit = event => {
         event.preventDefault();
-        console.log(this.state);
+
+        this.submitted = true;
+
+        const errors = this.validate(this.state.data);
+
+        this.setState({ errors, loading: !errors }, () => {
+            if (!errors) {
+                console.log(this.state.data);
+            }
+        });
     }
 
 }
