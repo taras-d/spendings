@@ -19,8 +19,7 @@ export default class Login extends React.Component {
         return (
             <PageLayout className="login">
                 <Logo/>
-                {result &&
-                    <Alert type={result.type} message={result.message}/>}
+                {result && <Alert type={result.type} message={result.message}/>}
                 <LoginForm onSubmit={this.onSubmit} loading={loading}/>
             </PageLayout>
         );
