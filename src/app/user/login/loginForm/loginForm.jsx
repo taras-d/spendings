@@ -25,8 +25,8 @@ export default class LoginForm extends React.Component {
     submitted = false;
 
     render() {
-        const { data, loading } = this.state;
-        let errors = this.state.errors || {};
+        const { data, loading } = this.state,
+            errors = this.state.errors || {};
             
         return (
             <Form className="login-form" onSubmit={this.onSubmit}>
@@ -49,16 +49,15 @@ export default class LoginForm extends React.Component {
                         value={data.password} 
                         onChange={this.onFieldChange}/>
                 </Form.Item>
-                <Form.Item>
-                    <Button className="login-form-submit"
-                        type="primary" 
+                <Form.Item className="text-center">
+                    <Button type="primary" 
                         htmlType="submit"
                         loading={loading}>
                         Log in
                     </Button>
                 </Form.Item>
-                <div className="text-center">
-                    Or <Link to="/signup">create account</Link>
+                <div className="text-right">
+                    <Link to="/signup">Create account</Link>
                 </div>
             </Form>
         );

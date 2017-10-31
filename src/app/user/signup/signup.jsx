@@ -19,6 +19,7 @@ export default class Singup extends React.Component {
         return (
             <PageLayout className="signup">
                 <Logo/>
+                <header className="signup-header">Create free account</header>
                 {result && <Alert type={result.type} message={result.message}/>}
                 <SignupForm onSubmit={this.onSubmit} loading={loading}/>
             </PageLayout>
@@ -30,7 +31,8 @@ export default class Singup extends React.Component {
         this.setState({ loading: true, result: null });
         setTimeout(() => {
             this.setState({
-                result: { type: 'error', message: 'User already exist' }
+                loading: false,
+                result: { type: 'success', message: 'Account successfuly created. Now you can login.' }
             });
         }, 500);
     }
