@@ -15,7 +15,7 @@ validators.required = validate.validators.presence;
 validators.password = function(value, options) {
     options = validate.extend({}, this.options, options);
     if (value && !options.pattern.test(value)) {
-        return 'should have 6-30 non-space characters';
+        return 'should be 6-30 characters long and do not contain spaces';
     }
 }
 validators.password.options = { pattern: /[^\s]{6,30}/ };
