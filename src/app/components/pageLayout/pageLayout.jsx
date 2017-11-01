@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import PageLayoutHeader from './pageLayoutHeader';
+
 import './pageLayout.less';
 
 export default class PageLayout extends React.Component {
@@ -26,3 +28,5 @@ export default class PageLayout extends React.Component {
     }
 
 }
+
+PageLayout.Header = PageLayoutHeader;

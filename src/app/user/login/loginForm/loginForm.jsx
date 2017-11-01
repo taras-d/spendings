@@ -56,8 +56,8 @@ export default class LoginForm extends React.Component {
                         Log in
                     </Button>
                 </Form.Item>
-                <div className="text-right">
-                    <Link to="/signup">Create account</Link>
+                <div className="text-center">
+                    Or <Link to="/signup">create account</Link>
                 </div>
             </Form>
         );

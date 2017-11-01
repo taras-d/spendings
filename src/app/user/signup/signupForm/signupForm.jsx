@@ -80,8 +80,8 @@ export default class SingupForm extends React.Component {
                         Sign up
                     </Button>
                 </Form.Item>
-                <div className="text-right">
-                    <Link to="/login">Log in</Link>
+                <div className="text-center">
+                    Or <Link to="/login">log in</Link>
                 </div>
             </Form>
         )
