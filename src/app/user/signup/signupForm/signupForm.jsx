@@ -112,7 +112,6 @@ export default class SingupForm extends React.Component {
                 email: true
             },
             password: {
-                required: true,
                 password: true
             }
         });
