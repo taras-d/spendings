@@ -7,7 +7,7 @@ const Logo = () => {
     return (
         <div className="logo">
             <Link to="/">
-                <span>S</span>
+                <span className="logo-first-letter">S</span>
                 <span>pendings</span>
             </Link>
         </div>

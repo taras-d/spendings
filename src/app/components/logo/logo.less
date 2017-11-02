@@ -12,14 +12,27 @@
             color: @c-azure-radiance;
             font-size: 24px;
             line-height: 32px;
-            &:first-child {
+            &.logo-first-letter {
                 width: 32px;
                 background-color: @c-azure-radiance;
                 color: white;
                 border-radius: 6px;
                 margin-right: 2px;
                 text-align: center;
+                animation: logo-rotate 6.5s linear infinite;
             }
         }
+    }
+}
+
+@keyframes logo-rotate {
+    0%  {
+        transform: rotateY(0deg);
+    }
+    77% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
     }
 }
