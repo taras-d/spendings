@@ -10,7 +10,7 @@ export default class Profile extends React.Component {
         return (
             <PageLayout className="profile">
                 <PageLayout.Header/>
-                <div>Profile</div>
+                <header className="section-header">My profile</header>
             </PageLayout>
         )
     }
