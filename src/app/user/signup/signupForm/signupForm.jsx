@@ -88,8 +88,14 @@ export default class SingupForm extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.loading !== nextProps.loading) {
+        const props = this.props;
+
+        if (props.loading !== nextProps.loading) {
             this.setState({ loading: nextProps.loading });
+        }
+
+        if (props.data !== nextProps.data) {
+            this.setState({ data: nextProps.data });
         }
     }
 

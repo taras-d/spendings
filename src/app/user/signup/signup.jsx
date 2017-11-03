@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Alert from 'antd/lib/alert';
 
@@ -11,30 +12,37 @@ export default class Singup extends React.Component {
 
     state = {
         loading: false,
-        result: null
+        data: {},
+        message: null
     };
 
     render() {
-        const { loading, result } = this.state;
+        const { loading, data, message } = this.state;
         return (
             <PageLayout className="signup">
                 <Logo/>
                 <header className="section-header">Create account</header>
-                {result && <Alert type={result.type} message={result.message}/>}
-                <SignupForm onSubmit={this.onSubmit} loading={loading}/>
+                {message && <Alert type={message.type} message={message.text}/>}
+                <SignupForm data={data} onSubmit={this.onSubmit} loading={loading}/>
             </PageLayout>
         );
     }
 
     onSubmit = data => {
         console.log(data);
-        this.setState({ loading: true, result: null });
+        this.setState({ loading: true, message: null });
         setTimeout(() => {
             this.setState({
                 loading: false,
-                result: { type: 'success', message: 'Account successfuly created. Now you can login.' }
+                message: { 
+                    type: 'success', 
+                    text: <div>
+                            Account successfuly created. <Link to="/login">Click here</Link> to login.
+                        </div>
+                },
+                data: {}
             });
-        }, 500);
+        }, 1500);
     }
 
 }

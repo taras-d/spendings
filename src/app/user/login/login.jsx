@@ -11,15 +11,15 @@ export default class Login extends React.Component {
 
     state = {
         loading: false,
-        result: null
+        message: null
     };
 
     render() {
-        const { result, loading } = this.state;
+        const { message, loading } = this.state;
         return (
             <PageLayout className="login">
                 <Logo/>
-                {result && <Alert type={result.type} message={result.message}/>}
+                {message && <Alert type={message.type} message={message.text}/>}
                 <LoginForm onSubmit={this.onSubmit} loading={loading}/>
             </PageLayout>
         );
@@ -27,13 +27,13 @@ export default class Login extends React.Component {
 
     onSubmit = data => {
         console.log(data);
-        this.setState({ loading: true, result: null });
+        this.setState({ loading: true, message: null });
         setTimeout(() => {
             this.setState({
                 loading: false,
-                result: { type: 'error', message: 'Email or password incorrect' }
+                message: { type: 'error', text: 'Email or password incorrect' }
             });
-        }, 500);
+        }, 1500);
     }
 
 }
