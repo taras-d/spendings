@@ -36,9 +36,12 @@ export default class Singup extends React.Component {
                 loading: false,
                 message: { 
                     type: 'success', 
-                    text: <div>
-                            Account successfuly created. <Link to="/login">Click here</Link> to login.
+                    text: (
+                        <div>
+                            Account successfuly created.<br/>
+                            <Link to="/login">Click here</Link> to login.
                         </div>
+                    )
                 },
                 data: {}
             });
