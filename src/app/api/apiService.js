@@ -41,13 +41,21 @@ export default class ApiService {
             }
         }
 
-        const obs = Observable.ajax(options).do(
-            res => res,
-            err => {
-                const xhr = err.xhr;
-                err.reason = `${xhr.status} ${xhr.statusText}`;
+        const obs = Observable.ajax(options).catch(ajaxError => {
+
+            const { response, xhr } = ajaxError;
+            
+            let reason;
+            if (response && response.error) {
+                reason = response.error;
+            } else if (xhr.status) {
+                reason = `${xhr.status} ${xhr.statusText}`;
+            } else {
+                reason = 'Internal server error';
             }
-        );
+
+            return Observable.throw({ reason });
+        });
 
         return options.mapResponse? obs.map(res => res.response): obs;
     }

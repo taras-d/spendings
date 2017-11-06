@@ -30,7 +30,7 @@ export default class Login extends React.Component {
         this.setState({ loading: true, message: null });
 
         api.userService.loginUser(data).subscribe(res => {
-            // Redirect to profile page
+            this.props.history.push('/profile');
         }, err => {
             this.setState({
                 loading: false,
