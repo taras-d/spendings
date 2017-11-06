@@ -1,27 +1,30 @@
 export default class UserService {
 
-    constructor(api) {
-        this.api = api;
+    constructor(apiService, tokenService) {
+        this.apiService = apiService;
+        this.tokenService = tokenService;
     }
 
     createUser(data) {
-        return this.api.post('user', data);
+        return this.apiService.post('user', data);
     }
 
     loginUser(data) {
-        return this.api.post('user/login', data);
+        return this.apiService.post('user/login', data).do(res => {
+            this.tokenService.setToken(res.token);
+        });
     }
 
     getUser() {
-        return this.api.get('user');
+        return this.apiService.get('user');
     }
 
     updateUser(data) {
-        return this.api.put('user', data);
+        return this.apiService.put('user', data);
     }
 
     deleteUser(password) {
-        return this.api.delete('user', { password });
+        return this.apiService.delete('user', { password });
     }
 
 }

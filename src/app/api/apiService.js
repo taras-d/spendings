@@ -13,6 +13,10 @@ export default class ApiService {
         sendToken: true
     };
 
+    constructor(tokenService) {
+        this.tokenService = tokenService;
+    }
+
     get(url, options) {
         return this.request({ url, method: 'GET' });
     }
@@ -35,7 +39,7 @@ export default class ApiService {
         options.url = `${config.apiUrl}/${options.url}`;
 
         if (options.sendToken) {
-            const token = localStorage.getItem(config.tokenKey);
+            const token = this.tokenService.getToken();
             if (token) {
                 options.headers[config.tokenHeader] = token;
             }
