@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 export default class UserService {
 
     constructor(apiService, tokenService) {
@@ -7,12 +9,6 @@ export default class UserService {
 
     createUser(data) {
         return this.apiService.post('user', data);
-    }
-
-    loginUser(data) {
-        return this.apiService.post('user/login', data).do(res => {
-            this.tokenService.setToken(res.token);
-        });
     }
 
     getUser() {
@@ -25,6 +21,17 @@ export default class UserService {
 
     deleteUser(password) {
         return this.apiService.delete('user', { password });
+    }
+
+    loginUser(data) {
+        return this.apiService.post('user/login', data).do(res => {
+            this.tokenService.setToken(res.token);
+        });
+    }
+
+    logoutUser() {
+        this.tokenService.removeToken();
+        return Observable.of(null);
     }
 
 }

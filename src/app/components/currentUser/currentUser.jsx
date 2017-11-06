@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import Dropdown from 'antd/lib/dropdown';
 import Menu from 'antd/lib/menu';
 import Icon from 'antd/lib/icon';
 import Button from 'antd/lib/button';
 
+import api from 'api';
+
 import './currentUser.less';
 
-export default class CurrentUser extends React.Component {
+class CurrentUser extends React.Component {
 
     render() {
         return (
@@ -33,7 +35,15 @@ export default class CurrentUser extends React.Component {
     }
 
     onItemClick = ({ key }) => {
-        console.log(key);
+        if (key === 'logout') {
+            api.userService.logoutUser().subscribe(() => {
+                this.props.history.push('/login');
+            });
+        } else if (key === 'profile') {
+            this.props.history.push('/profile');
+        }
     }
 
 }
+
+export default withRouter(CurrentUser);
