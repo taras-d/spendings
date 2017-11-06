@@ -3,6 +3,8 @@ import { Route, Switch, NavLink, withRouter } from 'react-router-dom';
 
 import utils from 'utils';
 
+import { ProtectedRoute } from 'components';
+
 import Login from '../user/login';
 import Signup from '../user/signup';
 import Profile from '../user/profile';
@@ -24,7 +26,7 @@ class Root extends React.Component {
                 <Switch>
                     <Route path="/login" exact component={Login}/>
                     <Route path="/signup" exact component={Signup}/>
-                    <Route path="/profile" exact component={Profile}/>
+                    <ProtectedRoute path="/profile" exact component={Profile}/>
                 </Switch>
             </div>
         );
