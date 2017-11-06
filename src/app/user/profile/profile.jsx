@@ -3,6 +3,8 @@ import React from 'react';
 import Spin from 'antd/lib/spin';
 import Alert from 'antd/lib/alert';
 
+import api from 'api';
+
 import PageLayout from 'components/pageLayout';
 
 import ProfileForm from './profileForm';
@@ -35,29 +37,40 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
+        this.getUser();
+    }
+
+    getUser() {
         this.setState({ loading: true });
-        setTimeout(() => {
-            this.setState({
+
+        api.userService.getUser().subscribe(data => {
+            this.setState({ loading: false, data });
+        }, err => {
+            this.setState({ 
                 loading: false,
-                data: {
-                    firstName: 'John',
-                    lastName: 'Doe'
-                }
+                message: { type: 'error', text: err.reason }
             });
-        }, 1700);
+        });
+    }
+
+    saveUser(data) {
+        this.setState({ saving: true, message: null });
+        
+        api.userService.updateUser(data).subscribe(() => {
+            this.setState({
+                saving: false,
+                message: { type: 'success', text: 'Changes successfuly saved' }
+            });
+        }, err => {
+            this.setState({
+                saving: false,
+                message: { type: 'error', text: err.reason }
+            });
+        })
     }
 
     onSubmit = data => {
-        this.setState({ saving: true, message: null });
-        setTimeout(() => {
-            this.setState({ 
-                saving: false,
-                message: {
-                    type: 'success',
-                    text: 'Changes successfuly saved'
-                }
-            });
-        }, 1700);
+        this.saveUser(data);
     }
 
 }
