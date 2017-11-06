@@ -2,6 +2,7 @@ import React from 'react';
 
 import Alert from 'antd/lib/alert';
 
+import api from 'api';
 import { PageLayout, Logo } from 'components';
 import LoginForm from './loginForm';
 
@@ -26,14 +27,16 @@ export default class Login extends React.Component {
     }
 
     onSubmit = data => {
-        console.log(data);
         this.setState({ loading: true, message: null });
-        setTimeout(() => {
+
+        api.userService.loginUser(data).subscribe(res => {
+            // Redirect to profile page
+        }, err => {
             this.setState({
                 loading: false,
-                message: { type: 'error', text: 'Email or password incorrect' }
+                message: { type: 'error', text: err.reason }
             });
-        }, 1500);
+        });
     }
 
 }

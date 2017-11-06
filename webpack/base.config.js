@@ -17,7 +17,8 @@ module.exports = {
             // Aliase for common imports
             components: path.join(paths.srcDir, 'app/components'),
             utils: path.join(paths.srcDir, 'app/utils'),
-            api: path.join(paths.srcDir, 'app/api')
+            api: path.join(paths.srcDir, 'app/api'),
+            config: path.join(paths.srcDir, 'app/config.js')
         }
     },
     module: {

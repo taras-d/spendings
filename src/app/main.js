@@ -9,11 +9,13 @@ import enUS from 'antd/lib/locale-provider/en_US';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/dom/ajax';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
-import '../styles/main.less';
-
+import config from './config';
 import Root from './root';
 import store from './store';
+
+import '../styles/main.less';
 
 render(
     <LocaleProvider locale={enUS}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Alert from 'antd/lib/alert';
 
+import api from 'api';
 import { PageLayout, Logo } from 'components';
 import SignupForm from './signupForm';
 
@@ -29,9 +30,9 @@ export default class Singup extends React.Component {
     }
 
     onSubmit = data => {
-        console.log(data);
         this.setState({ loading: true, message: null });
-        setTimeout(() => {
+
+        api.userService.createUser(data).subscribe(res => {
             this.setState({
                 loading: false,
                 message: { 
@@ -45,7 +46,15 @@ export default class Singup extends React.Component {
                 },
                 data: {}
             });
-        }, 1500);
+        }, err => {
+            this.setState({
+                loading: false,
+                message: {
+                    type: 'error',
+                    text: err.reason
+                }
+            });
+        });
     }
 
 }

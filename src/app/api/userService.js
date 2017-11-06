@@ -5,23 +5,23 @@ export default class UserService {
     }
 
     createUser(data) {
-        return this.api.post('/user', data);
+        return this.api.post('user', data);
     }
 
     loginUser(data) {
-        return this.api.post('/user/login', data);
+        return this.api.post('user/login', data);
     }
 
     getUser() {
-        return this.api.get('/user');
+        return this.api.get('user');
     }
 
     updateUser(data) {
-        return this.api.put('/user', data);
+        return this.api.put('user', data);
     }
 
     deleteUser(password) {
-        return this.api.delete('/user', { password });
+        return this.api.delete('user', { password });
     }
 
 }
