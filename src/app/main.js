@@ -6,10 +6,13 @@ import { Provider } from 'react-redux';
 import LocaleProvider from 'antd/lib/locale-provider';
 import enUS from 'antd/lib/locale-provider/en_US';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/dom/ajax';
+import 'rxjs/add/operator/map';
+
 import '../styles/main.less';
 
 import Root from './root';
-
 import store from './store';
 
 render(
