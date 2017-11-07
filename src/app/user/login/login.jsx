@@ -38,7 +38,7 @@ class Login extends React.Component {
             dispatch( userLogin(res.user) );
             history.push('/profile');
         }, err => {
-            // Login fail - show message
+            // Login fail - show error message
             this.setState({
                 loading: false,
                 message: { type: 'error', text: err.reason }

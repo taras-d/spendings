@@ -1,5 +1,7 @@
-import validate from './validate.js';
+import validate from './validate';
+import loadUser from './loadUser';
 
 export default {
-    validate
+    validate,
+    loadUser
 }

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import api from 'api';
-
-export default class ProtectedRoute extends React.Component {
+class ProtectedRoute extends React.Component {
 
     render() {
         const props = this.props;
-        if (api.tokenService.getToken()) {
-            return <props.component {...props}/>
-        } else {
-            return <Redirect to="/login" from={props.location.pathname}/>
-        }
+        return props.user? <props.component {...props}/>:
+            <Redirect to="/login" from={props.location.pathname}/>;
     }
 
 }
+
+const mapStateToProps = state => ({ user: state.user });
+
+export default connect(mapStateToProps)(ProtectedRoute);

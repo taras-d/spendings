@@ -14,7 +14,5 @@ const middleware = composeEnhancers(
     applyMiddleware( ReduxThunk )
 );
 
-// Store
-const store = createStore(reducer, middleware);
-
-export default store;
+// Export function which create store
+export default preloadedState => createStore(reducer, preloadedState, middleware);

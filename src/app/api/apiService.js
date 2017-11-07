@@ -58,6 +58,10 @@ export default class ApiService {
                 reason = 'Internal server error';
             }
 
+            if (xhr.status === 401) {
+                window.location.href = '/#/login';
+            }
+
             return Observable.throw({ reason });
         });
 

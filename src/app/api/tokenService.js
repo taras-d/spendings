@@ -16,4 +16,8 @@ export default class TokenService {
         localStorage.removeItem(this.key);
     }
 
+    hasToken() {
+        return Boolean(this.getToken());
+    }
+
 }
