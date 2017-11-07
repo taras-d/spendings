@@ -35,6 +35,7 @@ class Login extends React.Component {
         api.userService.loginUser(data).subscribe(res => {
             // Login ok - dispatch action and navigate to profile
             const { dispatch, history } = this.props;
+            api.loggerService.logUser(res.user);
             dispatch( userLogin(res.user) );
             history.push('/profile');
         }, err => {

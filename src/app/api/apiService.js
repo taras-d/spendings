@@ -13,8 +13,9 @@ export default class ApiService {
         sendToken: true
     };
 
-    constructor(tokenService) {
+    constructor(tokenService, loggerService) {
         this.tokenService = tokenService;
+        this.loggerService = loggerService;
     }
 
     get(url, options) {
@@ -36,6 +37,7 @@ export default class ApiService {
     request(options) {
 
         options = validate.extend({}, this.defaultOptions, options);
+        options.relativeUrl = options.url;
         options.url = `${config.apiUrl}/${options.url}`;
 
         if (options.sendToken) {
@@ -44,6 +46,8 @@ export default class ApiService {
                 options.headers[config.tokenHeader] = token;
             }
         }
+
+        this.loggerService.logApiRequest(options);
 
         const obs = Observable.ajax(options).catch(ajaxError => {
 
