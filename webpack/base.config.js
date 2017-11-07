@@ -18,7 +18,8 @@ module.exports = {
             components: path.join(paths.srcDir, 'app/components'),
             utils: path.join(paths.srcDir, 'app/utils'),
             api: path.join(paths.srcDir, 'app/api'),
-            config: path.join(paths.srcDir, 'app/config.js')
+            config: path.join(paths.srcDir, 'app/config.js'),
+            store: path.join(paths.srcDir, 'app/store')
         }
     },
     module: {

@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
+import userReducer from './user';
+
 // Root reducer
-// Replace it with your root reducer
-const reducer = (state = {}, action) => state;
+const reducer = combineReducers({
+    user: userReducer
+});
 
 // Middleware
-// By default middleware includes Redux DevTool extension (if available) and ReduxThunk
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(
     applyMiddleware( ReduxThunk )

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Spin from 'antd/lib/spin';
 import Alert from 'antd/lib/alert';
@@ -6,12 +7,13 @@ import Alert from 'antd/lib/alert';
 import api from 'api';
 
 import PageLayout from 'components/pageLayout';
-
 import ProfileForm from './profileForm';
+
+import { userUpdate } from 'store/user';
 
 import './profile.less';
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
 
     state = {
         loading: false,
@@ -53,15 +55,18 @@ export default class Profile extends React.Component {
         });
     }
 
-    saveUser(data) {
+    updateUser(data) {
         this.setState({ saving: true, message: null });
         
-        api.userService.updateUser(data).subscribe(() => {
+        api.userService.updateUser(data).subscribe(res => {
+            // Update ok - dispatch action and show message
+            this.props.dispatch( userUpdate(res) );
             this.setState({
                 saving: false,
                 message: { type: 'success', text: 'Changes successfuly saved' }
             });
         }, err => {
+            // Update fail - show message
             this.setState({
                 saving: false,
                 message: { type: 'error', text: err.reason }
@@ -70,7 +75,9 @@ export default class Profile extends React.Component {
     }
 
     onSubmit = data => {
-        this.saveUser(data);
+        this.updateUser(data);
     }
 
 }
+
+export default connect()(Profile);

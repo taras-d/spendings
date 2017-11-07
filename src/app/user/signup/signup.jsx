@@ -33,25 +33,28 @@ export default class Singup extends React.Component {
         this.setState({ loading: true, message: null });
 
         api.userService.createUser(data).subscribe(res => {
+            // Signup ok
             this.setState({
                 loading: false,
-                message: { 
-                    type: 'success', 
-                    text: (
-                        <div>
-                            Account successfuly created.<br/>
-                            <Link to="/login">Click here</Link> to login.
-                        </div>
-                    )
-                },
+                message: { type: 'success', text: this.getSuccessMessage() },
                 data: {}
             });
         }, err => {
+            // Signup fail
             this.setState({
                 loading: false,
                 message: { type: 'error', text: err.reason }
             });
         });
+    }
+
+    getSuccessMessage() {
+        return (
+            <div>
+                Account successfuly created.<br/>
+                <Link to="/login">Click here</Link> to login.
+            </div>
+        );
     }
 
 }

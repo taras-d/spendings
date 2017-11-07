@@ -1,14 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Alert from 'antd/lib/alert';
 
-import api from 'api';
 import { PageLayout, Logo } from 'components';
 import LoginForm from './loginForm';
 
+import api from 'api';
+import { userLogin } from 'store/user';
+
 import './login.less';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     state = {
         loading: false,
@@ -30,8 +33,12 @@ export default class Login extends React.Component {
         this.setState({ loading: true, message: null });
 
         api.userService.loginUser(data).subscribe(res => {
-            this.props.history.push('/profile');
+            // Login ok - dispatch action and navigate to profile
+            const { dispatch, history } = this.props;
+            dispatch( userLogin(res.user) );
+            history.push('/profile');
         }, err => {
+            // Login fail - show message
             this.setState({
                 loading: false,
                 message: { type: 'error', text: err.reason }
@@ -40,3 +47,5 @@ export default class Login extends React.Component {
     }
 
 }
+
+export default connect()(Login);
