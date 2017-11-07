@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Alert from 'antd/lib/alert';
+import Collapse from 'antd/lib/collapse';
 
 import api from 'api';
 
 import PageLayout from 'components/pageLayout';
 import ProfileForm from './profileForm';
+import ProfileDelete from './profileDelete';
 
 import { userUpdate } from 'store/user';
 
@@ -26,11 +28,16 @@ class Profile extends React.Component {
             <PageLayout className="profile">
                 <PageLayout.Header/>
                 <header className="section-header">My profile</header>
-                {message &&
-                    <Alert type={message.type} message={message.text} closable/>}
-                {user &&
-                    <ProfileForm data={user} loading={saving} onSubmit={this.onSubmit}/>
-                }
+                <Collapse defaultActiveKey={['personal']}>
+                    <Collapse.Panel header="Personal" key="personal">
+                        {message &&
+                            <Alert type={message.type} message={message.text} closable/>}
+                        <ProfileForm data={user} loading={saving} onSubmit={this.onSubmit}/>
+                    </Collapse.Panel>
+                    <Collapse.Panel header="Delete profile" key="delete">
+                        <ProfileDelete/>
+                    </Collapse.Panel>
+                </Collapse>
             </PageLayout>
         )
     }
