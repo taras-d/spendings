@@ -15,9 +15,12 @@ export default class Root extends React.Component {
         return (
             <div className="root">
                 <Switch>
-                    <Route path="/login" exact component={Login}/>
-                    <Route path="/signup" exact component={Signup}/>
-                    <ProtectedRoute path="/profile" exact component={Profile}/>
+                    <ProtectedRoute path="/login" exact component={Login}
+                        when="no-user" redirectPath="/profile"/>
+                    <ProtectedRoute path="/signup" exact component={Signup}
+                        when="no-user" redirectPath="/profile"/>
+                    <ProtectedRoute path="/profile" exact component={Profile}
+                        when="user" redirectPath="/login"/>
                 </Switch>
             </div>
         );

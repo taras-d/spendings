@@ -33,11 +33,10 @@ class Login extends React.Component {
         this.setState({ loading: true, message: null });
 
         api.userService.loginUser(data).subscribe(res => {
-            // Login ok - dispatch action and navigate to profile
+            // Login ok - dispatch action
             const { dispatch, history } = this.props;
             api.loggerService.logUser(res.user);
             dispatch( userLogin(res.user) );
-            history.push('/profile');
         }, err => {
             // Login fail - show error message
             this.setState({

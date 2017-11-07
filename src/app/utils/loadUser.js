@@ -6,7 +6,10 @@ import store from 'store';
 const loadUser = () => {
     if (api.tokenService.hasToken()) {
         return api.userService.getUser()
-            .do(user => api.loggerService.logUser(user))
+            .do(user => {
+                api.loggerService.logUser(user);
+                window.location = '/#/profile';
+            })
             .catch(() => Observable.of(null));
     } else {
         return Observable.of(null);

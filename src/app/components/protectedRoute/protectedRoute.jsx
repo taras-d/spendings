@@ -5,9 +5,17 @@ import { connect } from 'react-redux';
 class ProtectedRoute extends React.Component {
 
     render() {
-        const props = this.props;
-        return props.user? <props.component {...props}/>:
-            <Redirect to="/login" from={props.location.pathname}/>;
+        const { props } = this,
+            { redirectPath, when, user } = props;
+
+        if (
+            (when === 'user' && user) ||
+            (when === 'no-user' && !user)
+        ) {
+            return <props.component {...props}/>;
+        } else {
+            return <Redirect to={redirectPath} from={props.location.pathname}/>;
+        }
     }
 
 }
