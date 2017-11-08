@@ -34,7 +34,7 @@ class Profile extends React.Component {
                             <Alert type={message.type} message={message.text} closable/>}
                         <ProfileForm data={user} loading={saving} onSubmit={this.onSubmit}/>
                     </Collapse.Panel>
-                    <Collapse.Panel header="Delete profile" key="delete">
+                    <Collapse.Panel header="Delete account" key="delete">
                         <ProfileDelete/>
                     </Collapse.Panel>
                 </Collapse>

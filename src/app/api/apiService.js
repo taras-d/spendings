@@ -30,7 +30,7 @@ export default class ApiService {
         return this.request({ url, method: 'PUT', body });
     }
 
-    delete(url, data, options) {
+    delete(url, body, options) {
         return this.request({ url, method: 'DELETE', body });
     }
 
