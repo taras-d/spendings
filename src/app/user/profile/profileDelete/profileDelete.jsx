@@ -40,7 +40,7 @@ class ProfileDelete extends React.Component {
     getModal() {
         const { visible, loading, password, passwordValid } = this.state;
         return (
-            <Modal title="Delete account" className="profile-delete-modal"
+            <Modal title="Are you sure you want to delete account?" className="profile-delete-modal"
                 visible={visible} closable={false} maskClosable={false}
                 footer={[
                     <Button key="cancel" onClick={this.closeModal}
