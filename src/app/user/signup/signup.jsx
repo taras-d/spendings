@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 import Alert from 'antd/lib/alert';
 
@@ -36,7 +37,7 @@ export default class Singup extends React.Component {
             // Signup ok
             this.setState({
                 loading: false,
-                message: { type: 'success', text: this.getSuccessMessage() },
+                message: { type: 'success', text: this.getSuccessMessage(data) },
                 data: {}
             });
         }, err => {
@@ -48,11 +49,15 @@ export default class Singup extends React.Component {
         });
     }
 
-    getSuccessMessage() {
+    getSuccessMessage(data) {
+        const to = { 
+            pathname: '/login', 
+            search: queryString.stringify({ email: data.email })
+        };
         return (
             <div>
                 Account successfuly created.<br/>
-                <Link to="/login">Click here</Link> to login.
+                <Link to={to}>Click here</Link> to login.
             </div>
         );
     }

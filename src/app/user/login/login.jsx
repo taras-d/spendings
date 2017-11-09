@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 
 import Alert from 'antd/lib/alert';
 
@@ -14,17 +15,30 @@ import './login.less';
 class Login extends React.Component {
 
     state = {
+        data: {
+            email: '',
+            password: ''
+        },
         loading: false,
         message: null
     };
 
+    constructor() {
+        super(...arguments);
+
+        const query = queryString.parse(this.props.location.search);
+        if (query.email) {
+            this.state.data.email = query.email;
+        }
+    }
+
     render() {
-        const { message, loading } = this.state;
+        const { message, loading, data } = this.state;
         return (
             <PageLayout className="login">
                 <Logo/>
                 {message && <Alert type={message.type} message={message.text}/>}
-                <LoginForm onSubmit={this.onSubmit} loading={loading}/>
+                <LoginForm data={data} onSubmit={this.onSubmit} loading={loading}/>
             </PageLayout>
         );
     }

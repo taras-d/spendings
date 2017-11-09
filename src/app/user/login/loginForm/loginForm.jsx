@@ -14,10 +14,7 @@ import './loginForm.less';
 export default class LoginForm extends React.Component {
 
     state = {
-        data: {
-            email: '',
-            password: ''
-        },
+        data: this.props.data,
         errors: null,
         loading: this.props.loading
     };
@@ -65,8 +62,13 @@ export default class LoginForm extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         const props = this.props;
+
         if (props.loading !== nextProps.loading) {
             this.setState({ loading: nextProps.loading });
+        }
+
+        if (props.data !== nextProps.data) {
+            this.setState({ data: nextProps.data });
         }
     }
 
