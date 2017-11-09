@@ -7,9 +7,7 @@ import Button from 'antd/lib/button';
 
 import utils from 'utils';
 
-import './profileForm.less';
-
-export default class ProfileForm extends React.Component {
+export default class ProfileDetailsForm extends React.Component {
 
     state = {
         data: this.props.data,
@@ -31,7 +29,7 @@ export default class ProfileForm extends React.Component {
             errors = this.state.errors || {};
 
         return (
-            <Form className="profile-form" onSubmit={this.onSubmit} layout="horizontal">
+            <Form onSubmit={this.onSubmit} layout="horizontal">
                 <Form.Item label="First name" {...itemLayout}
                     validateStatus={errors.firstName? 'error': ''} help={errors.firstName}>
                     <Input name="firstName"
