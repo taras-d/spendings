@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 
 import Alert from 'antd/lib/alert';
+import Icon from 'antd/lib/icon';
 
 import api from 'api';
 import { PageLayout, Logo } from 'components';
@@ -26,6 +27,9 @@ export default class Singup extends React.Component {
                 <header className="section-header">Create account</header>
                 {message && <Alert type={message.type} message={message.text}/>}
                 <SignupForm data={data} onSubmit={this.onSubmit} loading={loading}/>
+                <div className="text-center">
+                    Already have account? <Link to="/login">Log in</Link>
+                </div>
             </PageLayout>
         );
     }

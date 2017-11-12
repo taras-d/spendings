@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import update from 'immutability-helper';
 
 import Form from 'antd/lib/form';
@@ -76,13 +75,11 @@ export default class SingupForm extends React.Component {
                 <Form.Item className="text-center">
                     <Button type="primary"
                         htmlType="submit"
-                        loading={loading}>
+                        loading={loading}
+                        icon="user-add">
                         Sign up
                     </Button>
                 </Form.Item>
-                <div className="text-center">
-                    Or <Link to="/login">log in</Link>
-                </div>
             </Form>
         )
     }

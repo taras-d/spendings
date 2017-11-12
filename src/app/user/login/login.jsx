@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
 import Alert from 'antd/lib/alert';
+import Icon from 'antd/lib/icon';
 
 import { PageLayout, Logo } from 'components';
 import LoginForm from './loginForm';
@@ -39,6 +41,9 @@ class Login extends React.Component {
                 <Logo/>
                 {message && <Alert type={message.type} message={message.text}/>}
                 <LoginForm data={data} onSubmit={this.onSubmit} loading={loading}/>
+                <div className="text-center">
+                    <Link to="/signup"><Icon type="user-add"/> create an account</Link>
+                </div>
             </PageLayout>
         );
     }
