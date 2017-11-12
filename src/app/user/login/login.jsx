@@ -10,6 +10,7 @@ import { PageLayout, Logo } from 'components';
 import LoginForm from './loginForm';
 
 import api from 'api';
+import utils from 'utils';
 import { userLogin } from 'store/user';
 
 import './login.less';
@@ -24,6 +25,8 @@ class Login extends React.Component {
         loading: false,
         message: null
     };
+
+    unmount = utils.unmountNotifier();
 
     constructor() {
         super(...arguments);
@@ -48,10 +51,14 @@ class Login extends React.Component {
         );
     }
 
+    componentWillUnmount() {
+        this.unmount.notify();
+    }
+
     onSubmit = data => {
         this.setState({ loading: true, message: null });
 
-        api.userService.loginUser(data).subscribe(res => {
+        api.userService.loginUser(data).takeUntil(this.unmount).subscribe(res => {
             // Login ok - dispatch action
             const { dispatch, history } = this.props;
             api.loggerService.logUser(res.user);
