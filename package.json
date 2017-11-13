@@ -15,6 +15,7 @@
     "bottlejs": "^1.6.1",
     "classnames": "^2.2.5",
     "immutability-helper": "^2.4.0",
+    "moment": "^2.19.2",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.1",
     "react": "^16.0.0",
