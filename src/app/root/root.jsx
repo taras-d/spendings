@@ -1,29 +1,54 @@
 import React from 'react';
-import { Route, Switch, NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Switch, withRouter } from 'react-router-dom';
 
 import { ProtectedRoute } from 'components';
 
 import Login from '../user/login';
 import Signup from '../user/signup';
 import Profile from '../user/profile';
+import Spendings from '../spendings';
 
 import './root.less';
 
-export default class Root extends React.Component {
+class Root extends React.Component {
 
     render() {
+        const user = this.props.user;
         return (
             <div className="root">
                 <Switch>
-                    <ProtectedRoute path="/login" exact component={Login}
-                        when="no-user" redirectPath="/profile"/>
-                    <ProtectedRoute path="/signup" exact component={Signup}
-                        when="no-user" redirectPath="/profile"/>
-                    <ProtectedRoute path="/profile" exact component={Profile}
-                        when="user" redirectPath="/login"/>
+                    <ProtectedRoute 
+                        path="/" exact 
+                        component={Spendings}
+                        canActivate={() => user}
+                        redirectTo="/login"
+                    />
+                    <ProtectedRoute 
+                        path="/login" exact 
+                        component={Login}
+                        canActivate={() => !user}
+                        redirectTo="/profile"
+                    />
+                    <ProtectedRoute 
+                        path="/signup" exact 
+                        component={Signup}
+                        canActivate={() => !user}
+                        redirectTo="/profile"
+                    />
+                    <ProtectedRoute 
+                        path="/profile" exact 
+                        component={Profile}
+                        canActivate={() => user}
+                        redirectTo="/login"
+                    />
                 </Switch>
             </div>
         );
     }
 
 }
+
+const mapStateToProps = state => ({ user: state.user });
+
+export default withRouter( connect(mapStateToProps)(Root) );
