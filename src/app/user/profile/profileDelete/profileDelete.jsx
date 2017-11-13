@@ -9,6 +9,7 @@ import Icon from 'antd/lib/icon';
 import Alert from 'antd/lib/alert';
 
 import api from 'api';
+import utils from 'utils';
 
 import { userLogout } from 'store/user';
 
@@ -24,7 +25,7 @@ class ProfileDelete extends React.Component {
         message: null
     };
 
-    submitted = false;
+    unmount = utils.unmountNotifier();
 
     render() {
         return (
@@ -35,6 +36,10 @@ class ProfileDelete extends React.Component {
                 {this.getModal()}
             </div>
         );
+    }
+
+    componentWillUnmount() {
+        this.unmount.notify();
     }
 
     getModal() {
@@ -97,7 +102,7 @@ class ProfileDelete extends React.Component {
     deleteConfirm = () => {
         this.setState({ loading: true, message: null });
 
-        api.userService.deleteUser(this.state.password).mergeMap(() => {
+        api.userService.deleteUser(this.state.password).takeUntil(this.unmount).mergeMap(() => {
             return api.userService.logoutUser();
         }).subscribe(() => {
             this.props.dispatch( userLogout() );

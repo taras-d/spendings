@@ -6,6 +6,7 @@ import Alert from 'antd/lib/alert';
 import Icon from 'antd/lib/icon';
 
 import api from 'api';
+import utils from 'utils';
 import { PageLayout, Logo } from 'components';
 import SignupForm from './signupForm';
 
@@ -18,6 +19,8 @@ export default class Singup extends React.Component {
         data: {},
         message: null
     };
+
+    unmount = utils.unmountNotifier();
 
     render() {
         const { loading, data, message } = this.state;
@@ -34,10 +37,14 @@ export default class Singup extends React.Component {
         );
     }
 
+    componentWillUnmount() {
+        this.unmount.notify();
+    }
+
     onSubmit = data => {
         this.setState({ loading: true, message: null });
 
-        api.userService.createUser(data).subscribe(res => {
+        api.userService.createUser(data).takeUntil(this.unmount).subscribe(res => {
             // Signup ok
             this.setState({
                 loading: false,

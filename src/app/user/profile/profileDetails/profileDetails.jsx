@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Alert from 'antd/lib/alert';
 
 import api from 'api';
+import utils from 'utils';
 import { userUpdate } from 'store/user';
 
 import ProfileDetailsForm from './profileDetailsForm';
@@ -17,6 +18,8 @@ class ProfileDetails extends React.Component {
         message: null
     };
 
+    unmount = utils.unmountNotifier();
+
     render() {
         const { message, saving } = this.state,
             user = this.props.user;
@@ -29,10 +32,14 @@ class ProfileDetails extends React.Component {
         );
     }
 
+    componentWillUnmount() {
+        this.unmount.notify();
+    }
+
     onSubmit = data => {
         this.setState({ saving: true, message: null });
         
-        api.userService.updateUser(data).subscribe(user => {
+        api.userService.updateUser(data).takeUntil(this.unmount).subscribe(user => {
             // Update ok - dispatch action and show success message
             this.props.dispatch( userUpdate(user) );
             this.setState({
