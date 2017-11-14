@@ -7,11 +7,12 @@ import Alert from 'antd/lib/alert';
 import Icon from 'antd/lib/icon';
 
 import { PageLayout, Logo } from 'components';
-import LoginForm from './loginForm';
 
 import api from 'api';
 import utils from 'utils';
 import { userLogin } from 'store/user';
+
+import LoginForm from './loginForm';
 
 import './login.less';
 

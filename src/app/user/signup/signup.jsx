@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 
 import Alert from 'antd/lib/alert';
-import Icon from 'antd/lib/icon';
 
 import api from 'api';
 import utils from 'utils';
 import { PageLayout, Logo } from 'components';
+
 import SignupForm from './signupForm';
 
 import './signup.less';

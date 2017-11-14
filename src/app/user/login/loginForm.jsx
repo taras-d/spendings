@@ -8,8 +8,6 @@ import Button from 'antd/lib/button';
 
 import utils from 'utils';
 
-import './loginForm.less';
-
 export default class LoginForm extends React.Component {
 
     state = {
