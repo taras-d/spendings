@@ -27,7 +27,7 @@ export default class Singup extends React.Component {
         return (
             <PageLayout className="signup">
                 <Logo/>
-                <header className="section-header">Create account</header>
+                <header className="signup-header">Create account</header>
                 {message && <Alert type={message.type} message={message.text}/>}
                 <SignupForm data={data} onSubmit={this.onSubmit} loading={loading}/>
                 <div className="text-center">

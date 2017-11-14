@@ -14,7 +14,7 @@ export default class Profile extends React.Component {
         return (
             <PageLayout className="profile">
                 <PageLayout.Header/>
-                <header className="section-header">My profile</header>
+                <header className="profile-header">Profile</header>
                 <Collapse defaultActiveKey={['details']}>
                     <Collapse.Panel header="Details" key="details">
                         <ProfileDetails/>
