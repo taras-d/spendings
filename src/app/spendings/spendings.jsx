@@ -5,6 +5,8 @@ import Icon from 'antd/lib/icon';
 
 import PageLayout from 'components/pageLayout';
 
+import SpendingsList from './spendingsList';
+
 import './spendings.less';
 
 export default class Spendings extends React.Component {
@@ -15,7 +17,7 @@ export default class Spendings extends React.Component {
                 <PageLayout.Header/>
                 <Tabs>
                     <Tabs.TabPane key="list" tab={<span><Icon type="database"/> List</span>}>
-                        List
+                        <SpendingsList/>
                     </Tabs.TabPane>
                     <Tabs.TabPane key="stats" tab={<span><Icon type="area-chart"/> Stats</span>}>
                         Stats

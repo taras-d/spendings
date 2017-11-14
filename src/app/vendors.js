@@ -51,3 +51,5 @@ import 'antd/lib/date-picker/style/index.css';
 import 'antd/lib/locale-provider';
 import 'antd/lib/tabs';
 import 'antd/lib/tabs/style/index.css';
+import 'antd/lib/table';
+import 'antd/lib/table/style/index.css';
