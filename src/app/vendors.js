@@ -38,6 +38,8 @@ import 'antd/lib/grid';
 import 'antd/lib/grid/style/index.css';
 import 'antd/lib/input';
 import 'antd/lib/input/style/index.css';
+import 'antd/lib/input-number';
+import 'antd/lib/input-number/style/index.css';
 import 'antd/lib/menu';
 import 'antd/lib/menu/style/index.css';
 import 'antd/lib/spin';
