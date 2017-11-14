@@ -1,40 +1,28 @@
 import React from 'react';
-import update from 'immutability-helper';
+
+import Tabs from 'antd/lib/tabs';
+import Icon from 'antd/lib/icon';
 
 import PageLayout from 'components/pageLayout';
-
-import utils from 'utils';
-
-import SpendingsFilter from './spendingsFilter';
-import SpendingsTable from './spendingsTable';
 
 import './spendings.less';
 
 export default class Spendings extends React.Component {
 
-    state = {
-        filter: {
-            dates: utils.getCurrMonthStartEndDates()
-        }
-    };
-
     render() {
-        const { filter } = this.state;
         return (
             <PageLayout>
                 <PageLayout.Header/>
-                <SpendingsFilter filter={filter} onChange={this.onFilterChange}/>
-                <SpendingsTable/>
+                <Tabs>
+                    <Tabs.TabPane key="list" tab={<span><Icon type="database"/> List</span>}>
+                        List
+                    </Tabs.TabPane>
+                    <Tabs.TabPane key="stats" tab={<span><Icon type="area-chart"/> Stats</span>}>
+                        Stats
+                    </Tabs.TabPane>
+                </Tabs>
             </PageLayout>
         )
-    }
-
-    onFilterChange = (value, prop) => {
-        this.setState(update(this.state, {
-            filter: {
-                [prop]: {$set: value}
-            }
-        }));
     }
 
 }
