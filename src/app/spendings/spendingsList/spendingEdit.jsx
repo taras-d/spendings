@@ -7,12 +7,13 @@ import DatePicker from 'antd/lib/date-picker';
 import Form from 'antd/lib/form';
 import Input from 'antd/lib/input';
 import InputNumber from 'antd/lib/input-number';
+import Button from 'antd/lib/button';
 
 export default class SpendingEdit extends React.Component {
 
     state = {
         loading: false,
-        item: this.props.item
+        spending: this.props.spending
     };
 
     formItemLayout = { 
@@ -42,50 +43,56 @@ export default class SpendingEdit extends React.Component {
     }
     
     getTitle() {
-        const item = this.props.item;
-        return `${item.id? 'Edit': 'Add'} spending`;
+        return `${this.state.spending.id? 'Edit': 'Add'} spending`;
     }
 
     getDate() {
-        const item = this.state.item;
+        const spending = this.state.spending;
         return (
             <Form.Item label="Date" {...this.formItemLayout}>
-                <DatePicker value={item.date} onChange={this.onDateChange}
+                <DatePicker value={spending.date} onChange={this.onDateChange}
                     format="DD.MM.YYYY" allowClear={false}/>
             </Form.Item>
         );
     }
 
     getItems() {
-        const spending = this.state.item;
+        const spending = this.state.spending;
 
-        const inputGroups = spending.items.map((item, index) => {
+        const listItems = spending.items.map((item, index) => {
             return (
-                <Input.Group compact size="default" key={index}>
-                    <Input placeholder="Title" 
-                        value={item.title}
-                        onChange={event => this.onItemChange(index, 'title', event.target.value)}/>
-                    <InputNumber min={0} 
-                        placeholder="Cost" 
-                        value={item.cost}
-                        onChange={value => this.onItemChange(index, 'cost', value)}/>
-                    <a onClick={() => this.onItemRemove(index)}>x</a>
-                </Input.Group>
-            )
+                <li key={index}>
+                    <Input.Group compact size="default">
+                        <Input placeholder="Title" 
+                            value={item.title}
+                            onChange={event => this.onItemChange(index, 'title', event.target.value)}/>
+                        <InputNumber min={0} 
+                            placeholder="Cost" 
+                            value={item.cost}
+                            onChange={value => this.onItemChange(index, 'cost', value)}/>
+                    </Input.Group>
+                    <Button type="circle" size="small" icon="close" 
+                        className="spending-item-delete"
+                        onClick={() => this.onItemRemove(index)}
+                    />
+                </li>
+            );
         });
 
         return (
             <Form.Item label="Items" {...this.formItemLayout}
-                className="spending-edit-items">
-                {inputGroups}
-                <a onClick={this.onItemAdd}>Add item</a>
+                className="spending-items-list">
+                <ul>{listItems}</ul>
+                <div className="text-center">
+                    <Button size="small" onClick={this.onItemAdd}>add item</Button>
+                </div>
             </Form.Item>
         );
     }
 
     onDateChange = value => {
         this.setState(update(this.state, {
-            item: {
+            spending: {
                 date: {$set: value}
             }
         }));
@@ -93,7 +100,7 @@ export default class SpendingEdit extends React.Component {
 
     onItemAdd = () => {
         this.setState(update(this.state, {
-            item: {
+            spending: {
                 items: {
                     $push: [{ title: '', cost: 0 }]
                 }
@@ -103,7 +110,7 @@ export default class SpendingEdit extends React.Component {
 
     onItemRemove = index => {
         this.setState(update(this.state, {
-            item: {
+            spending: {
                 items: {
                     $splice: [[index, 1]]
                 }
@@ -115,12 +122,12 @@ export default class SpendingEdit extends React.Component {
         const state = this.state;
 
         const newItem = {
-            ...state.item.items[index],
+            ...state.spending.items[index],
             [prop]: value
         };
 
         this.setState(update(state, {
-            item: {
+            spending: {
                 items: {
                     $splice: [[index, 1, newItem]]
                 }

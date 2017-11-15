@@ -22,19 +22,19 @@ export default class SpendingsList extends React.Component {
             ]
         },
         items: [],
-        editItem: null
+        editSpending: null
     };
 
     render() {
-        const { filter, editItem } = this.state;
+        const { filter, editSpending } = this.state;
         return (
             <div className="spendings-list">
                 <SpendingsFilter filter={filter} onChange={this.onFilterChange}/>
                 <Button type="primary" className="spendings-add" onClick={this.onAdd}>
                     <Icon type="file-add"/> Add
                 </Button>
-                {editItem && 
-                    <SpendingEdit item={editItem} 
+                {editSpending && 
+                    <SpendingEdit spending={editSpending} 
                         onComplete={this.onEditComplete} onCancel={this.onEditCancel}/>}
             </div>
         );
@@ -52,16 +52,16 @@ export default class SpendingsList extends React.Component {
         this.onEdit({ date: moment(), items: [] });
     }
 
-    onEdit = item => {
-        this.setState({ editItem: item });
+    onEdit = spending => {
+        this.setState({ editSpending: spending });
     }
 
     onEditCancel = () => {
-        this.setState({ editItem: null });
+        this.setState({ editSpending: null });
     }
 
-    onEditComplete = item => {
-        this.setState({ editItem: null });
+    onEditComplete = () => {
+        this.setState({ editSpending: null });
     }
 
 }
