@@ -27,7 +27,7 @@ export default class LoginForm extends React.Component {
                 <Form.Item validateStatus={errors.email? 'error': ''} help={errors.email}>
                     <Input name="email"
                         placeholder="Enter email" 
-                        addonBefore={<Icon type="mail" title="Email"/>} 
+                        prefix={<Icon type="mail" title="Email"/>} 
                         disabled={loading}
                         maxLength="80"
                         value={data.email} 
@@ -37,7 +37,7 @@ export default class LoginForm extends React.Component {
                     <Input name="password" 
                         placeholder="Enter password" 
                         type="password" 
-                        addonBefore={<Icon type="lock" title="Password"/>} 
+                        prefix={<Icon type="lock" title="Password"/>} 
                         disabled={loading}
                         maxLength="80"
                         value={data.password} 
