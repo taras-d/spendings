@@ -41,6 +41,7 @@ class CurrentUser extends React.Component {
         return (
             <Menu onClick={this.onItemClick}>
                 <Menu.Item key="profile">Profile</Menu.Item>
+                <Menu.Item key="spendings">Spendings</Menu.Item>
                 <Menu.Divider/>
                 <Menu.Item key="logout">Log out</Menu.Item>
             </Menu>
@@ -48,15 +49,25 @@ class CurrentUser extends React.Component {
     }
 
     onItemClick = ({ key }) => {
-        if (key === 'logout') {
-            api.userService.logoutUser().takeUntil(this.unmount).subscribe(() => {
-                // Logout - dispath action and navigate to login
-                const { dispatch, history } = this.props;
-                dispatch( userLogout() );
-                history.push('/login');
-            });
-        } else if (key === 'profile') {
-            this.props.history.push('/profile');
+        const props = this.props;
+        switch (key) {
+
+            case 'profile':
+                props.history.push('/profile');
+                break;
+
+            case 'spendings':
+                props.history.push('/');
+                break;
+
+            case 'logout':
+                api.userService.logoutUser().takeUntil(this.unmount).subscribe(() => {
+                    // Logout - dispath action and navigate to login
+                    const { dispatch, history } = props;
+                    dispatch( userLogout() );
+                    history.push('/login');
+                });
+                break;
         }
     }
 
