@@ -28,13 +28,13 @@ class Root extends React.Component {
                         path="/login" exact 
                         component={Login}
                         canActivate={() => !user}
-                        redirectTo="/profile"
+                        redirectTo="/"
                     />
                     <ProtectedRoute 
                         path="/signup" exact 
                         component={Signup}
                         canActivate={() => !user}
-                        redirectTo="/profile"
+                        redirectTo="/"
                     />
                     <ProtectedRoute 
                         path="/profile" exact 

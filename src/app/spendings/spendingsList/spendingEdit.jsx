@@ -71,7 +71,7 @@ export default class SpendingEdit extends React.Component {
                             value={item.cost}
                             onChange={value => this.onItemChange(index, 'cost', value)}/>
                     </Input.Group>
-                    <Button type="circle" size="small" icon="close" 
+                    <Button type="dashed" shape="circle" size="small" icon="close" 
                         className="spending-item-delete"
                         onClick={() => this.onItemRemove(index)}
                     />
@@ -84,7 +84,7 @@ export default class SpendingEdit extends React.Component {
                 className="spending-items-list">
                 <ul>{listItems}</ul>
                 <div className="text-center">
-                    <Button size="small" onClick={this.onItemAdd}>add item</Button>
+                    <Button type="dashed" size="small" onClick={this.onItemAdd}>add item</Button>
                 </div>
             </Form.Item>
         );
