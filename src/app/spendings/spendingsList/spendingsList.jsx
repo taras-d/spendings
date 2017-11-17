@@ -1,6 +1,4 @@
 import React from 'react';
-import update from 'immutability-helper';
-import moment from 'moment';
 
 import Button from 'antd/lib/button';
 import Icon from 'antd/lib/icon';
@@ -18,10 +16,7 @@ export default class SpendingsList extends React.Component {
 
     state = {
         filter: {
-            period: [
-                moment().startOf('month'),
-                moment().endOf('month')
-            ]
+            period: utils.getMonthStartEnd()
         },
         spendings: {
             data: [],
@@ -59,12 +54,8 @@ export default class SpendingsList extends React.Component {
         this.unmount.notify();
     }
 
-    onFilterChange = (prop, value) => {
-        this.setState(update(this.state, {
-            filter: {
-                [prop]: {$set: value}
-            }
-        }), () => this.getSpendings());
+    onFilterChange = filter => {
+        this.setState({ filter }, () => this.getSpendings());
     }
 
     onAdd = () => {
@@ -96,14 +87,9 @@ export default class SpendingsList extends React.Component {
 
     getSpendings() {
         this.setState({ loading: true });
-
-        const { filter } = this.state;
-        return api.spendingService.getSpendings({
-            from: filter.period[0],
-            to: filter.period[1]
-        }).takeUntil(this.unmount).subscribe(spendings => {
-            this.setState({ loading: false, spendings });
-        });
+        return api.spendingService.getSpendings(this.state.filter)
+            .takeUntil(this.unmount)
+            .subscribe(spendings => this.setState({ loading: false, spendings }));
     }
 
 }

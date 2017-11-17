@@ -82,7 +82,8 @@ export default class SpendingEdit extends React.Component {
                         <InputNumber min={0} 
                             placeholder="Cost" 
                             value={item.cost}
-                            onChange={value => this.onItemChange(index, 'cost', value)}/>
+                            onChange={value => this.onItemChange(index, 'cost', value)}
+                            onBlur={event => this.onItemChange(index, 'cost', Number(event.target.value) || 0)}/>
                     </Input.Group>
                     <Button type="dashed" shape="circle" size="small" icon="close" 
                         className="spending-item-delete"

@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'immutability-helper';
 
 import DatePicker from 'antd/lib/date-picker';
 
@@ -11,9 +12,19 @@ export default class SpendingsFilter extends React.Component {
                 Period
                 <DatePicker.RangePicker 
                     format="DD.MM.YYYY"
-                    value={filter.period} 
-                    onChange={value => onChange('period', value)}/>
+                    value={[filter.period.start, filter.period.end]} 
+                    onChange={this.onPeriodChange}/>
             </div>
         );
     }
+
+    onPeriodChange = value => {
+        const [start, end] = value;
+        this.props.onChange(update(this.props.filter, {
+            period: {
+                $set: { start, end }
+            }
+        }));
+    }
+    
 }
