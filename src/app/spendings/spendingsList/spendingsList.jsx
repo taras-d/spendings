@@ -23,14 +23,20 @@ export default class SpendingsList extends React.Component {
                 moment().endOf('month')
             ]
         },
-        data: [],
+        spendings: {
+            data: [],
+            total: 0,
+            limit: 10,
+            offset: 0   
+        },
+        loading: false,
         editSpending: null
     };
 
     unmount = utils.unmountNotifier();
 
     render() {
-        const { filter, editSpending, data, loading } = this.state;
+        const { filter, editSpending, spendings, loading } = this.state;
         return (
             <div className="spendings-list">
                 <SpendingsFilter filter={filter} onChange={this.onFilterChange}/>
@@ -40,7 +46,7 @@ export default class SpendingsList extends React.Component {
                 {editSpending && 
                     <SpendingEdit spending={editSpending} 
                         onComplete={this.onEditComplete} onCancel={this.onEditCancel}/>}
-                <SpendingsTable data={data} loading={loading}/>
+                <SpendingsTable data={spendings.data} loading={loading}/>
             </div>
         );
     }
@@ -58,33 +64,46 @@ export default class SpendingsList extends React.Component {
             filter: {
                 [prop]: {$set: value}
             }
-        }));
+        }), () => this.getSpendings());
     }
 
     onAdd = () => {
-        this.onEdit({ date: moment(), items: [] });
+        this.openEdit({ date: moment(), items: [] });
     }
 
     onEdit = spending => {
-        this.setState({ editSpending: spending });
+        this.openEdit(spending);
     }
 
     onEditCancel = () => {
-        this.setState({ editSpending: null });
+        this.openEdit(null);
     }
 
     onEditComplete = () => {
-        this.setState({ editSpending: null });
+        this.openEdit(null);
+        this.getSpendings();
+    }
+
+    onDelete = spending => {
+        api.spendingService.deleteSpending(spending.id)
+            .takeUntil(this.unmount)
+            .subscribe(() => this.getSpendings());
+    }
+
+    openEdit(spending) {
+        this.setState({ editSpending: spending });
     }
 
     getSpendings() {
         this.setState({ loading: true });
 
-        api.spendingService.getSpendings(this.state.fileter)
-            .takeUntil(this.unmount)
-            .subscribe(res => {
-                this.setState({ loading: false, data: res.data });
-            });
+        const { filter } = this.state;
+        return api.spendingService.getSpendings({
+            from: filter.period[0],
+            to: filter.period[1]
+        }).takeUntil(this.unmount).subscribe(spendings => {
+            this.setState({ loading: false, spendings });
+        });
     }
 
 }
