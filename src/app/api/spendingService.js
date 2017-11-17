@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default class SpendingService {
 
     constructor(apiService) {
@@ -17,7 +19,12 @@ export default class SpendingService {
     }
 
     getSpendings(data) {
-        return this.apiService.post(`spendings`, data);
+        return this.apiService.post(`spendings`, data).map(res => {
+            res.data.forEach(spending => {
+                spending.displayDate = moment(spending.date).format('DD MMMM YYYY');
+            });
+            return res;
+        });
     }
 
 }

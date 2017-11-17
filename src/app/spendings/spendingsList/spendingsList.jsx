@@ -6,9 +6,11 @@ import Button from 'antd/lib/button';
 import Icon from 'antd/lib/icon';
 
 import utils from 'utils';
+import api from 'api';
 
-import SpendingsFilter from './spendingsFilter';
 import SpendingEdit from './spendingEdit';
+import SpendingsFilter from './spendingsFilter';
+import SpendingsTable from './spendingsTable';
 
 import './spendingsList.less';
 
@@ -21,12 +23,14 @@ export default class SpendingsList extends React.Component {
                 moment().endOf('month')
             ]
         },
-        items: [],
+        data: [],
         editSpending: null
     };
 
+    unmount = utils.unmountNotifier();
+
     render() {
-        const { filter, editSpending } = this.state;
+        const { filter, editSpending, data, loading } = this.state;
         return (
             <div className="spendings-list">
                 <SpendingsFilter filter={filter} onChange={this.onFilterChange}/>
@@ -36,8 +40,17 @@ export default class SpendingsList extends React.Component {
                 {editSpending && 
                     <SpendingEdit spending={editSpending} 
                         onComplete={this.onEditComplete} onCancel={this.onEditCancel}/>}
+                <SpendingsTable data={data} loading={loading}/>
             </div>
         );
+    }
+
+    componentDidMount() {
+        this.getSpendings();
+    }
+
+    componentWillUnmount() {
+        this.unmount.notify();
     }
 
     onFilterChange = (prop, value) => {
@@ -62,6 +75,16 @@ export default class SpendingsList extends React.Component {
 
     onEditComplete = () => {
         this.setState({ editSpending: null });
+    }
+
+    getSpendings() {
+        this.setState({ loading: true });
+
+        api.spendingService.getSpendings(this.state.fileter)
+            .takeUntil(this.unmount)
+            .subscribe(res => {
+                this.setState({ loading: false, data: res.data });
+            });
     }
 
 }
