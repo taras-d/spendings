@@ -8,11 +8,16 @@ import Form from 'antd/lib/form';
 import Input from 'antd/lib/input';
 import InputNumber from 'antd/lib/input-number';
 import Button from 'antd/lib/button';
+import Alert from 'antd/lib/alert';
+
+import api from 'api';
+import utils from 'utils';
 
 export default class SpendingEdit extends React.Component {
 
     state = {
         loading: false,
+        message: null,
         spending: this.props.spending
     };
 
@@ -21,10 +26,12 @@ export default class SpendingEdit extends React.Component {
         wrapperCol: { span: 18 }
     };
 
+    unmount = utils.unmountNotifier();
+
     render() {
 
         const { onCancel } = this.props,
-            { loading } = this.state;
+            { loading, message } = this.state;
 
         return (
             <Modal className="spending-edit" 
@@ -34,12 +41,18 @@ export default class SpendingEdit extends React.Component {
                 visible={true}
                 onOk={this.onSubmit}
                 onCancel={onCancel}>
+                {message && 
+                    <Alert type={message.type} message={message.text} closable/>}
                 <Form>
                     {this.getDate()}
                     {this.getItems()}
                 </Form>
             </Modal>
         );
+    }
+
+    componentWillUnmount() {
+        this.unmount.notify();
     }
     
     getTitle() {
@@ -136,8 +149,37 @@ export default class SpendingEdit extends React.Component {
     }
 
     onSubmit = () => {
+
+        if (!this.valid()) {
+            this.setState({
+                message: { type: 'info', text: 'Item title cannot be empty' }
+            });
+            return;
+        }
+
         this.setState({ loading: true });
-        setTimeout(() => this.props.onComplete(), 1000);
+
+        this.getRequest().takeUntil(this.unmount).subscribe(
+            () => this.props.onComplete(),
+            err => {
+                this.setState({ 
+                    loading: false,
+                    message: { type: 'error', text: err.reason }
+                });
+            }
+        );
+    }
+
+    valid() {
+        const { spending } = this.state;
+        return !spending.items.some(item => !item.title || !item.title.trim());
+    }
+
+    getRequest() {
+        const { spending } = this.state;
+        return spending.id? 
+            api.spendingService.updateSpending(spending.id, spending):
+            api.spendingService.createSpending(spending);
     }
     
 }

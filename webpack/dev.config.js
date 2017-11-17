@@ -57,7 +57,8 @@ module.exports = merge(baseConfig, {
     devServer: {
         contentBase: paths.srcDir,
         overlay: true,
-        stats: 'minimal'
+        stats: 'minimal',
+        port: 8070
     },
     plugins: [
         // Include bundles in the index.html
