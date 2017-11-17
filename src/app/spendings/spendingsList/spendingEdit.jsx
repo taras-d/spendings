@@ -22,8 +22,8 @@ export default class SpendingEdit extends React.Component {
     };
 
     formItemLayout = { 
-        labelCol: { span: 6 },
-        wrapperCol: { span: 18 }
+        labelCol: { span: 3 },
+        wrapperCol: { span: 21 }
     };
 
     unmount = utils.unmountNotifier();
