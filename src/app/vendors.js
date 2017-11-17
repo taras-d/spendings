@@ -55,3 +55,6 @@ import 'antd/lib/tabs';
 import 'antd/lib/tabs/style/index.css';
 import 'antd/lib/table';
 import 'antd/lib/table/style/index.css';
+import 'antd/lib/popconfirm';
+import 'antd/lib/popover';
+import 'antd/lib/popover/style/index.css';

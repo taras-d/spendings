@@ -63,8 +63,11 @@ export default class SpendingEdit extends React.Component {
         const spending = this.state.spending;
         return (
             <Form.Item label="Date" {...this.formItemLayout}>
-                <DatePicker value={spending.date} onChange={this.onDateChange}
-                    format="DD.MM.YYYY" allowClear={false}/>
+                <DatePicker 
+                    value={moment(spending.date)} 
+                    onChange={this.onDateChange}
+                    format="DD.MM.YYYY" 
+                    allowClear={false}/>
             </Form.Item>
         );
     }

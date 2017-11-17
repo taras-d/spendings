@@ -34,14 +34,29 @@ export default class SpendingsList extends React.Component {
         const { filter, editSpending, spendings, loading } = this.state;
         return (
             <div className="spendings-list">
-                <SpendingsFilter filter={filter} onChange={this.onFilterChange}/>
-                <Button type="primary" className="spendings-add" onClick={this.onAdd}>
+                {/* Filter */}
+                <SpendingsFilter 
+                    filter={filter} 
+                    onChange={this.onFilterChange}/>
+                {/* Add button */}
+                <Button 
+                    type="primary" 
+                    className="spendings-add" 
+                    onClick={this.onAdd}>
                     <Icon type="file-add"/> Add
                 </Button>
+                {/* Edit modal */}
                 {editSpending && 
-                    <SpendingEdit spending={editSpending} 
-                        onComplete={this.onEditComplete} onCancel={this.onEditCancel}/>}
-                <SpendingsTable data={spendings.data} loading={loading}/>
+                    <SpendingEdit 
+                        spending={editSpending} 
+                        onComplete={this.onEditComplete} 
+                        onCancel={this.onEditCancel}/> }
+                {/* Table */}
+                <SpendingsTable 
+                    data={spendings.data} 
+                    loading={loading}
+                    onEdit={this.onEdit}
+                    onDelete={this.onDelete}/>
             </div>
         );
     }
@@ -59,7 +74,7 @@ export default class SpendingsList extends React.Component {
     }
 
     onAdd = () => {
-        this.openEdit({ date: moment(), items: [] });
+        this.openEdit({ date: new Date(), items: [] });
     }
 
     onEdit = spending => {
@@ -76,6 +91,7 @@ export default class SpendingsList extends React.Component {
     }
 
     onDelete = spending => {
+        this.setState({ loading: true });
         api.spendingService.deleteSpending(spending.id)
             .takeUntil(this.unmount)
             .subscribe(() => this.getSpendings());
