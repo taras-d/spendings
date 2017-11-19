@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'immutability-helper';
 
 import Button from 'antd/lib/button';
 import Icon from 'antd/lib/icon';
@@ -22,7 +23,7 @@ export default class SpendingsList extends React.Component {
             data: [],
             total: 0,
             limit: 10,
-            offset: 0   
+            offset: 0
         },
         loading: false,
         editSpending: null
@@ -53,10 +54,11 @@ export default class SpendingsList extends React.Component {
                         onCancel={this.onEditCancel}/> }
                 {/* Table */}
                 <SpendingsTable 
-                    data={spendings.data} 
+                    spendings={spendings}
                     loading={loading}
                     onEdit={this.onEdit}
-                    onDelete={this.onDelete}/>
+                    onDelete={this.onDelete}
+                    onPageChange={this.onPageChange}/>
             </div>
         );
     }
@@ -97,15 +99,29 @@ export default class SpendingsList extends React.Component {
             .subscribe(() => this.getSpendings());
     }
 
+    onPageChange = page => {
+        const state = this.state;
+        this.setState(update(state, {
+            spendings: {
+                offset: {$set: (page - 1) * state.spendings.limit}
+            }
+        }), () => this.getSpendings());
+    }
+
     openEdit(spending) {
         this.setState({ editSpending: spending });
     }
 
     getSpendings() {
         this.setState({ loading: true });
-        return api.spendingService.getSpendings(this.state.filter)
-            .takeUntil(this.unmount)
-            .subscribe(spendings => this.setState({ loading: false, spendings }));
+
+        const { filter, spendings } = this.state;
+        return api.spendingService.getSpendings({
+            period: filter.period,
+            offset: spendings.offset,
+            limit: spendings.limit
+        }).takeUntil(this.unmount)
+        .subscribe(spendings => this.setState({ loading: false, spendings }));
     }
 
 }

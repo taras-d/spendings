@@ -58,3 +58,5 @@ import 'antd/lib/table/style/index.css';
 import 'antd/lib/popconfirm';
 import 'antd/lib/popover';
 import 'antd/lib/popover/style/index.css';
+import 'antd/lib/pagination';
+import 'antd/lib/pagination/style/index.css';

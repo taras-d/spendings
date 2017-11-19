@@ -25,16 +25,18 @@ export default class SpendingsTable extends React.Component {
     }
 
     render() {
-        const { data, loading } = this.props;
+        const { spendings, loading } = this.props;
         return (
             <Table className="spendings-table" 
+                bordered={true}
                 size="middle"
                 rowKey="id"
                 locale={{ emptyText: 'No spendings' }}
                 loading={loading}
                 columns={this.tableColumns} 
-                dataSource={data}
+                dataSource={spendings.data}
                 expandedRowRender={this.getItemsSubTable}
+                pagination={this.getPagination()}
             />
         );
     }
@@ -42,6 +44,7 @@ export default class SpendingsTable extends React.Component {
     getItemsSubTable = record => {
         return (
             <Table className="spending-items-table" 
+                bordered={true}
                 size="small"
                 rowKey="id"
                 locale={{ emptyText: 'No items' }}
@@ -67,6 +70,19 @@ export default class SpendingsTable extends React.Component {
                 </Popconfirm>
             </div>
         );
+    }
+
+    getPagination() {
+        const { spendings, onPageChange } = this.props,
+            { total, limit, offset } = spendings;
+
+        return {
+            total,
+            pageSize: limit,
+            current: offset / limit + 1,
+            onChange: onPageChange,
+            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`
+        };
     }
 
 }
