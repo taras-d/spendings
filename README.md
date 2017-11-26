@@ -1,6 +1,8 @@
-# Spendings UI
+# Spendings
 
-This Application related to [Spending Backend API](https://github.com/taras-d/spendings-api). Make sure to setup API first.
+Application that helps you to record your everyday spendings
+
+> NOTE: This application depends on [Spendings Backend API](https://github.com/taras-d/spendings-api)
 
 ### Installation
 ```bash
