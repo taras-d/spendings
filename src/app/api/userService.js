@@ -8,24 +8,24 @@ export default class UserService {
     }
 
     createUser(data) {
-        return this.apiService.post('user', data);
+        return this.apiService.post('users', data);
     }
 
     getUser() {
-        return this.apiService.get('user');
+        return this.apiService.get('current-user');
     }
 
     updateUser(data) {
-        return this.apiService.put('user', data);
+        return this.apiService.patch('current-user', data);
     }
 
     deleteUser(password) {
-        return this.apiService.delete('user', { password });
+        return this.apiService.delete(`current-user?password=${password}`);
     }
 
     loginUser(data) {
-        return this.apiService.post('user/login', data).do(res => {
-            this.tokenService.setToken(res.token);
+        return this.apiService.post('authentication', data).do(res => {
+            this.tokenService.setToken(res.accessToken);
         });
     }
 

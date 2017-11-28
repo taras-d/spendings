@@ -79,9 +79,9 @@ export default class SpendingEdit extends React.Component {
             return (
                 <li key={index}>
                     <Input.Group compact size="default">
-                        <Input placeholder="Title" 
-                            value={item.title}
-                            onChange={event => this.onItemChange(index, 'title', event.target.value)}/>
+                        <Input placeholder="Name" 
+                            value={item.name}
+                            onChange={event => this.onItemChange(index, 'name', event.target.value)}/>
                         <InputNumber min={0} 
                             placeholder="Cost" 
                             value={item.cost}
@@ -119,7 +119,7 @@ export default class SpendingEdit extends React.Component {
         this.setState(update(this.state, {
             spending: {
                 items: {
-                    $push: [{ title: '', cost: 0 }]
+                    $push: [{ name: '', cost: 0 }]
                 }
             }
         }));
@@ -156,7 +156,7 @@ export default class SpendingEdit extends React.Component {
 
         if (!this.valid()) {
             this.setState({
-                message: { type: 'info', text: 'Item title cannot be empty' }
+                message: { type: 'info', text: 'Item name cannot be empty' }
             });
             return;
         }
@@ -176,7 +176,7 @@ export default class SpendingEdit extends React.Component {
 
     valid() {
         const { spending } = this.state;
-        return !spending.items.some(item => !item.title || !item.title.trim());
+        return !spending.items.some(item => !item.name || !item.name.trim());
     }
 
     getRequest() {

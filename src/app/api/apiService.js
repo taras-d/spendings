@@ -30,12 +30,15 @@ export default class ApiService {
         return this.request({ url, method: 'PUT', body });
     }
 
+    patch(url, body, options) {
+        return this.request({ url, method: 'PATCH', body });
+    }
+
     delete(url, body, options) {
         return this.request({ url, method: 'DELETE', body });
     }
 
     request(options) {
-
         options = validate.extend({}, this.defaultOptions, options);
         options.relativeUrl = options.url;
         options.url = `${config.apiUrl}/${options.url}`;
@@ -43,7 +46,7 @@ export default class ApiService {
         if (options.sendToken) {
             const token = this.tokenService.getToken();
             if (token) {
-                options.headers[config.tokenHeader] = token;
+                options.headers.Authorization = `Bearer ${token}`;
             }
         }
 
@@ -54,8 +57,8 @@ export default class ApiService {
             const { response, xhr } = ajaxError;
             
             let reason;
-            if (response && response.error) {
-                reason = response.error;
+            if (response && response.message) {
+                reason = response.message;
             } else if (xhr.status) {
                 reason = `${xhr.status} ${xhr.statusText}`;
             } else {

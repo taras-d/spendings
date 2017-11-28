@@ -64,11 +64,11 @@ class Login extends React.Component {
             const { dispatch, history } = this.props;
             api.loggerService.logUser(res.user);
             dispatch( userLogin(res.user) );
-        }, err => {
+        }, () => {
             // Login fail - show error message
             this.setState({
                 loading: false,
-                message: { type: 'error', text: err.reason }
+                message: { type: 'error', text: 'Incorrect email or password' }
             });
         });
     }

@@ -21,9 +21,9 @@ export default class SpendingsList extends React.Component {
         },
         spendings: {
             data: [],
-            total: 0,
             limit: 10,
-            offset: 0
+            skip: 0,
+            total: 0
         },
         loading: false,
         editSpending: null
@@ -72,7 +72,12 @@ export default class SpendingsList extends React.Component {
     }
 
     onFilterChange = filter => {
-        this.setState({ filter }, () => this.getSpendings());
+        this.setState(update(this.state, { 
+            filter: {$set: filter},
+            spendings: {
+                skip: {$set: 0}
+            }
+        }), () => this.getSpendings());
     }
 
     onAdd = () => {
@@ -103,7 +108,7 @@ export default class SpendingsList extends React.Component {
         const state = this.state;
         this.setState(update(state, {
             spendings: {
-                offset: {$set: (page - 1) * state.spendings.limit}
+                skip: {$set: (page - 1) * state.spendings.limit}
             }
         }), () => this.getSpendings());
     }
@@ -118,7 +123,7 @@ export default class SpendingsList extends React.Component {
         const { filter, spendings } = this.state;
         return api.spendingService.getSpendings({
             period: filter.period,
-            offset: spendings.offset,
+            skip: spendings.skip,
             limit: spendings.limit
         }).takeUntil(this.unmount)
         .subscribe(spendings => this.setState({ loading: false, spendings }));

@@ -11,7 +11,7 @@ export default class SpendingsTable extends React.Component {
     ];
 
     subTableColumns = [
-        { title: 'Title', dataIndex: 'title', width: '70%' },
+        { title: 'Name', dataIndex: 'name', width: '70%' },
         { title: 'Cost', dataIndex: 'cost', width: '30%' }
     ];
 
@@ -74,12 +74,12 @@ export default class SpendingsTable extends React.Component {
 
     getPagination() {
         const { spendings, onPageChange } = this.props,
-            { total, limit, offset } = spendings;
+            { total, limit, skip } = spendings;
 
         return {
             total,
             pageSize: limit,
-            current: offset / limit + 1,
+            current: skip / limit + 1,
             onChange: onPageChange,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`
         };
