@@ -3,6 +3,8 @@ var path = require('path'),
 
 var paths = require('./paths.js');
 
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
     entry: {
         // Split code into three chunks: app, vendors and polyfills 
@@ -50,6 +52,10 @@ module.exports = {
         // Put common modules in vendors chunk
         new  webpack.optimize.CommonsChunkPlugin({ 
             name: 'vendors' 
-        })
+        }),
+        // Exclude moment locales
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        // Uncomment line below to enable Bundle Analyzer, then run 'npm start'
+        //new BundleAnalyzerPlugin()
     ]
 };

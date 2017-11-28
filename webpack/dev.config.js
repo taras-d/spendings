@@ -64,10 +64,6 @@ module.exports = merge(baseConfig, {
         // Include bundles in the index.html
         new HtmlWebpackPlugin({
             template: path.join(paths.srcDir, 'index.html')
-        }),
-        // Uncomment line below to enable Bundle Analyzer, then run 'npm start'
-        //new BundleAnalyzerPlugin(),
-        // Exclude moment locales
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+        })
     ]
 });
