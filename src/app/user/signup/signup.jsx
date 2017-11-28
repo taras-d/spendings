@@ -55,7 +55,7 @@ export default class Singup extends React.Component {
             // Signup fail
             this.setState({
                 loading: false,
-                message: { type: 'error', text: err.reason }
+                message: { type: 'error', text: 'User already exist' }
             });
         });
     }

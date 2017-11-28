@@ -109,7 +109,7 @@ class ProfileDelete extends React.Component {
         }, err => {
             this.setState({
                 loading: false,
-                message: { type: 'error', text: err.reason }
+                message: { type: 'error', text: 'Incorrect password' }
             });
         })
     }

@@ -46,7 +46,7 @@ module.exports = merge(baseConfig, {
                         loader: 'less-loader',
                         options: {
                             // Include 'styles' folder to simplify import for styles
-                            // For example, "@import '../../../styles/base/variables'" can be changed to "@import 'base/variables'"
+                            // Example: "@import '../../../styles/variables'" => "@import 'variables'"
                             paths: [ path.join(paths.srcDir, 'styles') ]
                         }
                     },
