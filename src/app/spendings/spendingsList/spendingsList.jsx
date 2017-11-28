@@ -101,7 +101,18 @@ export default class SpendingsList extends React.Component {
         this.setState({ loading: true });
         api.spendingService.deleteSpending(spending.id)
             .takeUntil(this.unmount)
-            .subscribe(() => this.getSpendings());
+            .subscribe(() => {
+                const state = this.state;
+                if (state.spendings.data.length === 1 && state.spendings.skip > 0) {
+                    this.setState(update(this.state, {
+                        spendings: {
+                            skip: {$set: state.spendings.skip - state.spendings.limit}
+                        }
+                    }), () => this.getSpendings())
+                } else {
+                    this.getSpendings();
+                }
+            });
     }
 
     onPageChange = page => {

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import validate from 'validate.js';
+import $ from 'jquery';
 
 import config from 'config';
 
@@ -39,7 +39,7 @@ export default class ApiService {
     }
 
     request(options) {
-        options = validate.extend({}, this.defaultOptions, options);
+        options = $.extend(true, {}, this.defaultOptions, options);
         options.relativeUrl = options.url;
         options.url = `${config.apiUrl}/${options.url}`;
 

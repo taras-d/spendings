@@ -12,6 +12,7 @@ import 'bottlejs';
 import 'query-string';
 import 'moment';
 import 'immutability-helper';
+import 'jquery';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
