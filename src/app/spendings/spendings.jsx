@@ -2,6 +2,7 @@ import React from 'react';
 
 import Tabs from 'antd/lib/tabs';
 import Icon from 'antd/lib/icon';
+import Alert from 'antd/lib/alert';
 
 import PageLayout from 'components/pageLayout';
 
@@ -20,7 +21,7 @@ export default class Spendings extends React.Component {
                         <SpendingsList/>
                     </Tabs.TabPane>
                     <Tabs.TabPane key="stats" tab={<span><Icon type="area-chart"/> Stats</span>}>
-                        Stats
+                        <Alert message={<div><b>Stats</b> is under development yet</div>} type="info"></Alert>
                     </Tabs.TabPane>
                 </Tabs>
             </PageLayout>
