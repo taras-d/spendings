@@ -1,9 +1,9 @@
-var path = require('path'),
+const path = require('path'),
     webpack = require('webpack');
 
-var paths = require('./paths.js');
+const paths = require('./paths.js');
 
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {

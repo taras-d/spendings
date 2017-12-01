@@ -1,11 +1,11 @@
-var path = require('path'),
+const path = require('path'),
     webpack = require('webpack'),
     merge = require('webpack-merge')
     
-var HtmlWebpackPlugin = require('html-webpack-plugin'),
+const HtmlWebpackPlugin = require('html-webpack-plugin'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-var paths = require('./paths.js'),
+const paths = require('./paths.js'),
     baseConfig = require('./base.config');
 
 module.exports = merge(baseConfig, {
@@ -46,7 +46,7 @@ module.exports = merge(baseConfig, {
                         loader: 'less-loader',
                         options: {
                             // Include 'styles' folder to simplify import for styles
-                            // Example: "@import '../../../styles/variables'" => "@import 'variables'"
+                            // "@import '../../../styles/variables'" => "@import 'variables'"
                             paths: [ path.join(paths.srcDir, 'styles') ]
                         }
                     },

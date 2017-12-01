@@ -1,13 +1,13 @@
-var webpack = require('webpack'),
+const webpack = require('webpack'),
     merge = require('webpack-merge'),
     path = require('path');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin'),
+const HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin")
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var paths = require('./paths.js'),
+const paths = require('./paths.js'),
     baseConfig = require('./base.config.js');
 
 module.exports = merge(baseConfig, {
