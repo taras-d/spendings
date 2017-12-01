@@ -10,6 +10,6 @@ const loadUser = () => {
     } else {
         return Observable.of(null);
     }
-}
+};
 
 export default loadUser;

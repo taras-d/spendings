@@ -1,4 +1,4 @@
-const validate = require('validate.js');
+import validate from 'validate.js';
 
 const validators = validate.validators;
 
@@ -19,12 +19,12 @@ validators.password = function(value, options) {
     } else if (!options.pattern.test(value)) {
         return options.invalidMessage;
     }
-}
+};
 validators.password.options = { 
     pattern: /[^\s]{6,30}/,
     invalidMessage: 'should be 6-30 characters long and do not contain spaces',
     emptyMessage: 'is required'
-}
+};
 
 export default function() {
     const errors = validate(...arguments);

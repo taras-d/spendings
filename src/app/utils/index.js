@@ -9,11 +9,11 @@ const getMonthStartEnd = () => {
         start: moment().startOf('month'),
         end: moment().endOf('month')
     };
-}
+};
 
 export default {
     validate,
     loadUser,
     unmountNotifier,
     getMonthStartEnd
-}
+};

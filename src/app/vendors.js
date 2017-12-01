@@ -14,8 +14,8 @@ import 'moment';
 import 'immutability-helper';
 import 'jquery';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';  // eslint-disable-line no-unused-vars
+import { Subject } from 'rxjs/Subject';        // eslint-disable-line no-unused-vars
 import 'rxjs/add/observable/dom/ajax';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';

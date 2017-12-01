@@ -19,27 +19,36 @@ export default class ApiService {
     }
 
     get(url, options) {
-        return this.request({ url, method: 'GET' });
+        return this.request(
+            this._mergeOptions(options, { url, method: 'GET' })
+        );
     }
 
     post(url, body, options) {
-        return this.request({ url, method: 'POST', body });
+        return this.request(
+            this._mergeOptions(options, { url, method: 'POST', body })
+        );
     }
 
     put(url, body, options) {
-        return this.request({ url, method: 'PUT', body });
+        return this.request( 
+            this._mergeOptions(options, { url, method: 'PUT', body })
+        );
     }
 
     patch(url, body, options) {
-        return this.request({ url, method: 'PATCH', body });
+        return this.request(
+            this._mergeOptions(options, { url, method: 'PATCH', body })
+        );
     }
 
     delete(url, body, options) {
-        return this.request({ url, method: 'DELETE', body });
+        return this.request(
+            this._mergeOptions(options, { url, method: 'DELETE', body })
+        );
     }
 
     request(options) {
-        options = $.extend(true, {}, this.defaultOptions, options);
         options.relativeUrl = options.url;
         options.url = `${config.apiUrl}/${options.url}`;
 
@@ -73,6 +82,10 @@ export default class ApiService {
         });
 
         return options.mapResponse? obs.map(res => res.response): obs;
+    }
+
+    _mergeOptions(...options) {
+        return $.extend(true, this.defaultOptions, ...options);
     }
 
 }

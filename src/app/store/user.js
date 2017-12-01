@@ -11,6 +11,6 @@ export { userLogin, userLogout, userUpdate };
 // Reducer
 export default handleActions({
     USER_LOGIN: (state, action) => action.payload,
-    USER_LOGOUT: (state, action) => null,
+    USER_LOGOUT: (state, action) => null, // eslint-disable-line no-unused-vars
     USER_UPDATE: (state, action) => action.payload
 }, null);
