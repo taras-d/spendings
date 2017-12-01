@@ -21,7 +21,7 @@ export default class SpendingsList extends React.Component {
         },
         spendings: {
             data: [],
-            limit: 10,
+            limit: 2,
             skip: 0,
             total: 0
         },
@@ -104,6 +104,7 @@ export default class SpendingsList extends React.Component {
             .subscribe(() => {
                 const state = this.state;
                 if (state.spendings.data.length === 1 && state.spendings.skip > 0) {
+                    // Move to the previous page if user deletes last item from current page
                     this.setState(update(this.state, {
                         spendings: {
                             skip: {$set: state.spendings.skip - state.spendings.limit}
@@ -119,7 +120,9 @@ export default class SpendingsList extends React.Component {
         const state = this.state;
         this.setState(update(state, {
             spendings: {
-                skip: {$set: (page - 1) * state.spendings.limit}
+                skip: {
+                    $set: utils.paging.getSkip(page, state.spendings.limit)
+                }
             }
         }), () => this.getSpendings());
     }

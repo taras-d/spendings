@@ -16,7 +16,7 @@ import Root from './root';
 
 import '../styles/main.less';
 
-// Load current user, create store and render app
+// Try to Load current user before starting app
 utils.loadUser().subscribe(user => {
     const store = createStore({ user });
     render(

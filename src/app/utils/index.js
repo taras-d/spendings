@@ -11,9 +11,15 @@ const getMonthStartEnd = () => {
     };
 };
 
+const paging = {
+    getPage: (skip, limit) => skip / limit + 1,
+    getSkip: (page, limit) => (page - 1) * limit
+};
+
 export default {
     validate,
     loadUser,
     unmountNotifier,
-    getMonthStartEnd
+    getMonthStartEnd,
+    paging
 };

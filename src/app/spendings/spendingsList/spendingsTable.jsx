@@ -3,6 +3,8 @@ import React from 'react';
 import Table from 'antd/lib/table';
 import Popconfirm from 'antd/lib/popconfirm';
 
+import utils from 'utils';
+
 export default class SpendingsTable extends React.Component {
 
     tableColumns = [
@@ -79,7 +81,7 @@ export default class SpendingsTable extends React.Component {
         return {
             total,
             pageSize: limit,
-            current: skip / limit + 1,
+            current: utils.paging.getPage(skip, limit),
             onChange: onPageChange,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`
         };
