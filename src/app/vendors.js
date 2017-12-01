@@ -2,6 +2,7 @@ import 'react';
 import 'react-dom';
 import 'react-router-dom';
 import 'react-redux';
+import 'prop-types';
 
 import 'redux';
 import 'redux-thunk';
@@ -44,3 +45,5 @@ import 'antd/lib/table';
 import 'antd/lib/popconfirm';
 import 'antd/lib/popover';
 import 'antd/lib/pagination';
+import 'antd/lib/locale-provider';
+import 'antd/lib/locale-provider/en_US';
