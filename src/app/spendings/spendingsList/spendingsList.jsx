@@ -21,7 +21,7 @@ export default class SpendingsList extends React.Component {
         },
         spendings: {
             data: [],
-            limit: 2,
+            limit: 10,
             skip: 0,
             total: 0
         },

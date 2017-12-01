@@ -1,3 +1,5 @@
+const prod = process.env.NODE_ENV === 'production';
+
 export default class LoggerService {
 
     logUser(user) {
@@ -9,6 +11,10 @@ export default class LoggerService {
     }
 
     logGroup(name, ...args) {
+        if (prod) {
+            return;
+        }
+
         console.groupCollapsed(name);
         args.forEach(a => console.log(a));
         console.groupEnd();
