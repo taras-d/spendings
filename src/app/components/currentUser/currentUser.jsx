@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Dropdown from 'antd/lib/dropdown';
 import Menu from 'antd/lib/menu';
@@ -15,6 +16,10 @@ import { userLogout } from 'store/user';
 import './currentUser.less';
 
 class CurrentUser extends React.Component {
+
+    static propTypes = {
+        user: PropTypes.object
+    };
     
     unmount = utils.unmountNotifier();
 
