@@ -1,4 +1,4 @@
-const prod = process.env.NODE_ENV === 'production';
+const prod = process.env.NODE_ENV === 'production'; // eslint-disable-line no-undef
 
 export default class LoggerService {
 

@@ -47,3 +47,4 @@ import 'antd/lib/popover';
 import 'antd/lib/pagination';
 import 'antd/lib/locale-provider';
 import 'antd/lib/locale-provider/en_US';
+import 'antd/lib/auto-complete';

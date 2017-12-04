@@ -12,6 +12,7 @@ import Alert from 'antd/lib/alert';
 
 import api from 'api';
 import utils from 'utils';
+import { AutoComplete } from 'components';
 
 import './spendingEdit.less';
 
@@ -29,6 +30,7 @@ export default class SpendingEdit extends React.Component {
     };
 
     unmount = utils.unmountNotifier();
+    itemNameSearch = null;
 
     render() {
 
@@ -75,15 +77,17 @@ export default class SpendingEdit extends React.Component {
     }
 
     getItems() {
-        const spending = this.state.spending;
+        const { spending } = this.state;
 
         const listItems = spending.items.map((item, index) => {
             return (
                 <li key={index}>
                     <Input.Group compact size="default">
-                        <Input placeholder="Name" 
+                        <AutoComplete placeholder="Name"
                             value={item.name}
-                            onChange={event => this.onItemChange(index, 'name', event.target.value)}/>
+                            dataSource={item.dataSource}
+                            onChange={value => this.onItemChange(index, 'name', value)}
+                            onSearch={value => this.onItemNameSearch(index, value)}/>
                         <InputNumber min={0} 
                             placeholder="Cost" 
                             value={item.cost}
@@ -100,8 +104,8 @@ export default class SpendingEdit extends React.Component {
 
         return (
             <Form.Item label="Items" {...this.formItemLayout}
-                className="spending-items-list">
-                <ul>{listItems}</ul>
+                className="spending-items">
+                <ul className="spending-items-list">{listItems}</ul>
                 <div className="text-center">
                     <Button type="dashed" size="small" onClick={this.onItemAdd}>add item</Button>
                 </div>
@@ -152,6 +156,16 @@ export default class SpendingEdit extends React.Component {
                 }
             }
         }));
+    }
+
+    onItemNameSearch = (index, value) => {
+        if (this.itemNameSearch) {
+            this.itemNameSearch.unsubscribe();
+        }
+        
+        this.itemNameSearch = api.spendingService.autocompleteSpendingItem(value)
+            .takeUntil(this.unmount)
+            .subscribe(data => this.onItemChange(index, 'dataSource', data));
     }
 
     onSubmit = () => {

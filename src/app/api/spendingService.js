@@ -43,4 +43,8 @@ export default class SpendingService {
         });
     }
 
+    autocompleteSpendingItem(search) {
+        return this.apiService.get(`spending-item-autocomplete?search=${search}`);
+    }
+
 }

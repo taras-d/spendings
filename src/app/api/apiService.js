@@ -85,7 +85,7 @@ export default class ApiService {
     }
 
     _mergeOptions(...options) {
-        return $.extend(true, this.defaultOptions, ...options);
+        return $.extend(true, {}, this.defaultOptions, ...options);
     }
 
 }
