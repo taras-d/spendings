@@ -12,6 +12,7 @@ import 'validate.js';
 import 'bottlejs';
 import 'query-string';
 import 'moment';
+import 'numeral';
 import 'immutability-helper';
 import 'jquery';
 

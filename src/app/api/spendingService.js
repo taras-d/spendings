@@ -1,4 +1,5 @@
 import moment from 'moment';
+import numeral from 'numeral';
 import queryString from 'query-string';
 
 export default class SpendingService {
@@ -38,6 +39,10 @@ export default class SpendingService {
             res.data.forEach(spending => {
                 spending.date = new Date(spending.date);
                 spending.displayDate = moment(spending.date).format('DD MMMM YYYY');
+
+                spending.displaySum = numeral(spending.sum).format('0,0.00');
+
+                spending.items.forEach(item => item.displayCost = numeral(item.cost).format('0,0.00'));
             });
             return res;
         });

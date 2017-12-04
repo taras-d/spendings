@@ -11,12 +11,12 @@ export default class SpendingsTable extends React.Component {
 
     tableColumns = [
         { title: 'Date', dataIndex: 'displayDate', width: '50%' },
-        { title: 'Sum', dataIndex: 'sum', width: '30%' }
+        { title: 'Sum', dataIndex: 'displaySum', width: '30%' }
     ];
 
     subTableColumns = [
         { title: 'Name', dataIndex: 'name', width: '70%' },
-        { title: 'Cost', dataIndex: 'cost', width: '30%' }
+        { title: 'Cost', dataIndex: 'displayCost', width: '30%' }
     ];
 
     constructor() {
