@@ -3,6 +3,8 @@ import update from 'immutability-helper';
 
 import DatePicker from 'antd/lib/date-picker';
 
+import './spendingsFilter';
+
 export default class SpendingsFilter extends React.Component {
 
     render() {

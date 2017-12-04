@@ -7,9 +7,9 @@ import Icon from 'antd/lib/icon';
 import utils from 'utils';
 import api from 'api';
 
-import SpendingEdit from './spendingEdit';
-import SpendingsFilter from './spendingsFilter';
-import SpendingsTable from './spendingsTable';
+import SpendingEdit from './spendingEdit/spendingEdit';
+import SpendingsFilter from './spendingsFilter/spendingsFilter';
+import SpendingsTable from './spendingsTable/spendingsTable';
 
 import './spendingsList.less';
 

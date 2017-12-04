@@ -5,6 +5,8 @@ import Popconfirm from 'antd/lib/popconfirm';
 
 import utils from 'utils';
 
+import './spendingsTable.less';
+
 export default class SpendingsTable extends React.Component {
 
     tableColumns = [

@@ -13,6 +13,8 @@ import Alert from 'antd/lib/alert';
 import api from 'api';
 import utils from 'utils';
 
+import './spendingEdit.less';
+
 export default class SpendingEdit extends React.Component {
 
     state = {
