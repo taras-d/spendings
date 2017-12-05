@@ -2,6 +2,8 @@
 
 Application that helps you to record your everyday spendings
 
+![Demo](demo.gif)
+
 > NOTE: This application depends on [Spendings Backend API](https://github.com/taras-d/spendings-api)
 
 ### Installation
