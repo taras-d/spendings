@@ -11,7 +11,7 @@ export default class SpendingsFilter extends React.Component {
         const { filter, onChange } = this.props;
         return (
             <div className="spendings-filter">
-                Period
+                Period: 
                 <DatePicker.RangePicker 
                     format="DD.MM.YYYY"
                     value={[filter.period.start, filter.period.end]} 

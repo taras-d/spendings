@@ -23,7 +23,9 @@ export default class SpendingsList extends React.Component {
             data: [],
             limit: 10,
             skip: 0,
-            total: 0
+            total: 0,
+            totalSum: 0,
+            displayTotalSum: '0'
         },
         loading: false,
         editSpending: null
@@ -39,6 +41,10 @@ export default class SpendingsList extends React.Component {
                 <SpendingsFilter 
                     filter={filter} 
                     onChange={this.onFilterChange}/>
+                {/* Total sum */}
+                <div className="spendings-total-sum" title="Total sum by period">
+                    Sum: <span>{spendings.displayTotalSum}</span>
+                </div>
                 {/* Add button */}
                 <Button 
                     type="primary" 
