@@ -5,38 +5,41 @@
         padding: 24px;
     }
     .ant-alert {
-        max-width: 300px;
+        max-width: 400px;
         margin: 0 auto 24px;
     }
     .ant-form {
-        max-width: 300px;
+        max-width: 400px;
         margin: 0 auto;
     }
     .spending-items {
         margin-bottom: 0;
-        .ant-form-item-control {
-            max-width: 300px;
-        }
-        .spending-items-list > li {
-            position: relative;
-            padding-right: 26px;
-            .ant-input-group {
-                .ant-select-auto-complete {
-                    width: 60%;
+        .spending-items-list {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            > li {
+                position: relative;
+                padding-right: 30px;
+                margin-bottom: 2px;
+                .ant-input-group {
+                    .ant-select-auto-complete {
+                        width: 60%;
+                    }
+                    .ant-input-number {
+                        margin-top: 0;
+                        margin-right: 0;
+                        width: 40%;
+                    }
                 }
-                .ant-input-number {
-                    margin-top: 0;
-                    margin-right: 0;
-                    width: 40%;
-                }
-            }
-            .spending-item-delete {
-                position: absolute;
-                top: 6px;
-                right: 0;
-                &:hover {
-                    cursor: pointer;
-                    color: @c-azure-radiance;
+                .spending-item-delete {
+                    position: absolute;
+                    top: 4px;
+                    right: 0;
+                    &:hover {
+                        cursor: pointer;
+                        color: @c-dodger-blue;
+                    }
                 }
             }
         }

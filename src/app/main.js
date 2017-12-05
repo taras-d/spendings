@@ -6,7 +6,6 @@ import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import LocaleProvider from 'antd/lib/locale-provider';
-import enUS from 'antd/lib/locale-provider/en_US';
 
 import config from 'config';
 import utils from 'utils';
@@ -20,7 +19,7 @@ import '../styles/main.less';
 utils.loadUser().subscribe(user => {
     const store = createStore({ user });
     render(
-        <LocaleProvider locale={enUS}>
+        <LocaleProvider>
             <Provider store={store}>
                 <Router>
                     <Root/>

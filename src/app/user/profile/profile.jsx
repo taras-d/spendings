@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Collapse from 'antd/lib/collapse';
+import Divider from 'antd/lib/divider';
 
 import PageLayout from 'components/pageLayout';
 import ProfileDetails from './profileDetails';
@@ -14,6 +15,7 @@ export default class Profile extends React.Component {
         return (
             <PageLayout className="profile">
                 <PageLayout.Header/>
+                <Divider/>
                 <header className="profile-header">Profile</header>
                 <Collapse defaultActiveKey={['details']}>
                     <Collapse.Panel header="Details" key="details">

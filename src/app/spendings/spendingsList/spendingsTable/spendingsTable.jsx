@@ -2,6 +2,7 @@ import React from 'react';
 
 import Table from 'antd/lib/table';
 import Popconfirm from 'antd/lib/popconfirm';
+import Divider from 'antd/lib/divider';
 
 import utils from 'utils';
 
@@ -64,7 +65,7 @@ export default class SpendingsTable extends React.Component {
         return (
             <div className="text-right">
                 <a onClick={() => onEdit(record)}>Edit</a>
-                <span className="ant-divider"/>
+                <Divider type="vertical"/>
                 <Popconfirm 
                     title="Are you sure?"
                     okText="Yes"

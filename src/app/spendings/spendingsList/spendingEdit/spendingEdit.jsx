@@ -25,8 +25,8 @@ export default class SpendingEdit extends React.Component {
     };
 
     formItemLayout = { 
-        labelCol: { span: 3 },
-        wrapperCol: { span: 21 }
+        labelCol: { span: 4 },
+        wrapperCol: { span: 20 }
     };
 
     unmount = utils.unmountNotifier();
@@ -46,7 +46,7 @@ export default class SpendingEdit extends React.Component {
                 onOk={this.onSubmit}
                 onCancel={onCancel}>
                 {message && 
-                    <Alert type={message.type} message={message.text} closable/>}
+                    <Alert type={message.type} message={message.text}/>}
                 <Form>
                     {this.getDate()}
                     {this.getItems()}
@@ -94,7 +94,10 @@ export default class SpendingEdit extends React.Component {
                             onChange={value => this.onItemChange(index, 'cost', value)}
                             onBlur={event => this.onItemChange(index, 'cost', Number(event.target.value) || 0)}/>
                     </Input.Group>
-                    <Button type="dashed" shape="circle" size="small" icon="close" 
+                    <Button type="dashed" 
+                        shape="circle" 
+                        size="small" 
+                        icon="close" 
                         className="spending-item-delete"
                         onClick={() => this.onItemRemove(index)}
                     />
